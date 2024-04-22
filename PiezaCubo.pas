@@ -17,7 +17,7 @@ type
       OriginCube : array[1..10] of TPoint3d;
       temporalCube : array[1..10] of TPoint3d;
       toPaintCube : array[1..10] of TPoint3d;
-      position : TPoint3d;
+      originPosition : TPoint3d;
       procedure copyOnTemporal();
       procedure copyOnToPaint();
     public
@@ -62,7 +62,7 @@ begin
     //Save the points.
     copyOnTemporal();
     copyOnToPaint();
-    position.x := 0; position.y:= 0; position.z := 0;
+    Originposition.x := 0; Originposition.y:= 0; Originposition.z := 0;
 end;
 
 constructor TPiezaCubo.Create(x: Integer; y: Integer; z: Integer; factor: Real);
@@ -94,7 +94,7 @@ begin
     //Save the points. Now the center of the cube is in (x,y,z)*factor
     copyOnTemporal();
     copyOnToPaint();
-    position.x := x*factor; position.y := y*factor; position.z := z*factor;
+    Originposition.x := x*factor; Originposition.y := y*factor; Originposition.z := z*factor;
 end;
 
 
@@ -103,9 +103,12 @@ begin
 
 end;
 
+//Simply get the coords of the origin, and adds it to the position point
 procedure TPiezaCubo.traslate(x: Integer; y: Integer; z: Integer);
 begin
-
+  position.x := originPosition.x+ x;
+  position.y := originPosition.y+y;
+  position.z := originPosition.z+z;
 end;
 
 procedure TPiezaCubo.rotateOnCenter(alpha: Real);
@@ -160,6 +163,7 @@ end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
 begin
+  //Aplica traslacion 2d al cubo
 
 end;
 
