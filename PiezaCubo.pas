@@ -26,7 +26,7 @@ type
       constructor Create(x,y,z : integer; factor : Real); overload;
       procedure scaleBy(factor :Real);
       procedure traslate(x, y, z : Integer);
-      procedure rotateOnCenter(alpha :Real);
+      procedure rotateOnCenter(alphaX, alphaY, alphaZ:Real);
       procedure rotateOnX(alpha: Real);
       procedure rotateOnY(alpha: Real);
       procedure rotateOnZ(alpha: Real);
@@ -107,13 +107,21 @@ end;
 //Simply get the coords of the origin, and adds it to the position point
 procedure TPiezaCubo.traslate(x: Integer; y: Integer; z: Integer);
 begin
-  position.x := originPosition.x+ x;
-  position.y := originPosition.y+y;
-  position.z := originPosition.z+z;
+  position.x := x;
+  position.y := y;
+  position.z := z;
 end;
 
-procedure TPiezaCubo.rotateOnCenter(alpha: Real);
+procedure TPiezaCubo.rotateOnCenter(alphaX: Real; alphaY: Real; Alphaz: Real);
+var
+  i : integer;
+  xAux, yAux, zAux: Real;
 begin
+  alphaX:=(alphaX*Pi)/180;
+  alphaY:=(alphaY*Pi)/180;
+  alphaZ:=(alphaZ*Pi)/180;
+
+
 
 end;
 
@@ -132,7 +140,7 @@ begin
       toPaintCube[i].y := yAux;
       toPaintCube[i].z := zAux;
     end;
-    
+
 end;
 
 procedure TPiezaCubo.rotateOnY(alpha: Real);

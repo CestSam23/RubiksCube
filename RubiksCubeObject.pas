@@ -47,52 +47,55 @@ var
   i,j,k : integer;
 begin
   //Front face
-  cube[0,0,0] := TPiezaCubo.Create(-1,-1,2,20);
-  cube[0,1,0] := TPiezaCubo.Create(0,-1,2,20);
-  cube[0,2,0] := TPiezaCubo.Create(1,-1,2,20);
-  cube[1,0,0] := TPiezaCubo.Create(-1,0,2,20);
+  cube[0,0,0] := TPiezaCubo.Create(-2,-2,2,20);
+  cube[0,1,0] := TPiezaCubo.Create(0,-2,2,20);
+  cube[0,2,0] := TPiezaCubo.Create(2,-2,2,20);
+  cube[1,0,0] := TPiezaCubo.Create(-2,0,2,20);
   cube[1,1,0] := TPiezaCubo.Create(0,0,2,20);
-  cube[1,2,0] := TPiezaCubo.Create(1,0,2,20);
-  cube[2,0,0] := TPiezaCubo.Create(-1,1,2,20);
-  cube[2,1,0] := TPiezaCubo.Create(0,1,2,20);
-  cube[2,2,0] := TPiezaCubo.Create(1,1,2,20);
+  cube[1,2,0] := TPiezaCubo.Create(2,0,2,20);
+  cube[2,0,0] := TPiezaCubo.Create(-2,2,2,20);
+  cube[2,1,0] := TPiezaCubo.Create(0,2,2,20);
+  cube[2,2,0] := TPiezaCubo.Create(2,2,2,20);
 
   //Middle face
-  cube[0,0,1] := TPiezaCubo.Create(-1,-1,0,20);
-  cube[0,1,1] := TPiezaCubo.Create(0,-1,0,20);
-  cube[0,2,1] := TPiezaCubo.Create(1,-1,0,20);
-  cube[1,0,1] := TPiezaCubo.Create(-1,0,0,20);
+  cube[0,0,1] := TPiezaCubo.Create(-2,-2,0,20);
+  cube[0,1,1] := TPiezaCubo.Create(0,-2,0,20);
+  cube[0,2,1] := TPiezaCubo.Create(2,-2,0,20);
+  cube[1,0,1] := TPiezaCubo.Create(-2,0,0,20);
   cube[1,1,1] := TPiezaCubo.Create(0,0,0,20);
-  cube[1,2,1] := TPiezaCubo.Create(1,0,0,20);
-  cube[2,0,1] := TPiezaCubo.Create(-1,1,0,20);
-  cube[2,1,1] := TPiezaCubo.Create(0,1,0,20);
-  cube[2,2,1] := TPiezaCubo.Create(1,1,0,20);
+  cube[1,2,1] := TPiezaCubo.Create(2,0,0,20);
+  cube[2,0,1] := TPiezaCubo.Create(-2,2,0,20);
+  cube[2,1,1] := TPiezaCubo.Create(0,2,0,20);
+  cube[2,2,1] := TPiezaCubo.Create(2,2,0,20);
 
   //Back face
-  cube[0,0,2] := TPiezaCubo.Create(-1,-1,-2,20);
-  cube[0,1,2] := TPiezaCubo.Create(0,-1,-2,20);
-  cube[0,2,2] := TPiezaCubo.Create(1,-1,-2,20);
-  cube[1,0,2] := TPiezaCubo.Create(-1,0,-2,20);
+  cube[0,0,2] := TPiezaCubo.Create(-2,-2,-2,20);
+  cube[0,1,2] := TPiezaCubo.Create(0,-2,-2,20);
+  cube[0,2,2] := TPiezaCubo.Create(2,-2,-2,20);
+  cube[1,0,2] := TPiezaCubo.Create(-2,0,-2,20);
   cube[1,1,2] := TPiezaCubo.Create(0,0,-2,20);
-  cube[1,2,2] := TPiezaCubo.Create(1,0,-2,20);
-  cube[2,0,2] := TPiezaCubo.Create(-1,1,-2,20);
-  cube[2,1,2] := TPiezaCubo.Create(0,1,-2,20);
-  cube[2,2,2] := TPiezaCubo.Create(1,1,-2,20);
+  cube[1,2,2] := TPiezaCubo.Create(2,0,-2,20);
+  cube[2,0,2] := TPiezaCubo.Create(-2,2,-2,20);
+  cube[2,1,2] := TPiezaCubo.Create(0,2,-2,20);
+  cube[2,2,2] := TPiezaCubo.Create(2,2,-2,20);
 
-  center.x := x;
-  center.y := y;
-  canva := ACanvas;
   for i := 0 to 2 do
     begin
       for j := 0 to 2 do
         begin
           for k:=0 to 2 do
             begin
-              cube[i,j,k].traslate(center.x,center.y,0);
+              cube[i,j,k].traslate(x,y,0);
             end;
 
-        end;
+       end;
     end;
+
+
+  center.x := x;
+  center.y := y;
+  canva := ACanvas;
+
 
 end;
 
@@ -126,11 +129,11 @@ begin
           for k:=0 to 2 do
             begin
               cube[i,j,k].rotateOny(5);
-              paint();
             end;
 
         end;
     end;
+                  paint();
 end;
 
 procedure TRubiksCubeObject.XAxisRotate;
@@ -144,11 +147,11 @@ begin
           for k:=0 to 2 do
             begin
               cube[i,j,k].rotateOnx(5);
-              paint();
             end;
 
         end;
     end;
+    paint;
 end;
 
 procedure TRubiksCubeObject.zAxisRotate;
@@ -162,11 +165,11 @@ begin
           for k:=0 to 2 do
             begin
               cube[i,j,k].rotateOnz(5);
-              paint();
             end;
 
         end;
     end;
+                  paint();
 end;
 
 procedure TRubiksCubeObject.U();
