@@ -21,6 +21,19 @@ type
       procedure YAxisRotate();
       procedure XAxisRotate();
       procedure zAxisRotate();
+      procedure U();
+      procedure UPrim();
+      procedure D();
+      procedure DPrim();
+      procedure F();
+      procedure FPrim();
+      procedure B();
+      procedure BPrim();
+      procedure R();
+      procedure RPrim();
+      procedure L();
+      procedure LPrim();
+
   end;
 implementation
 
@@ -155,6 +168,72 @@ begin
         end;
     end;
 end;
+
+procedure TRubiksCubeObject.U();
+var
+  temporal : TPiezaCubo;
+begin
+  temporal := cube[0,1,0];
+//  cube[0,1,0] :=
+  // Implementación de la rotación de la capa superior (Up)
+
+end;
+
+procedure TRubiksCubeObject.UPrim();
+begin
+  // Implementación de la rotación inversa de la capa superior (Up)
+end;
+
+procedure TRubiksCubeObject.D();
+begin
+  // Implementación de la rotación de la capa inferior (Down)
+end;
+
+procedure TRubiksCubeObject.DPrim();
+begin
+  // Implementación de la rotación inversa de la capa inferior (Down)
+end;
+
+procedure TRubiksCubeObject.F();
+begin
+  // Implementación de la rotación de la capa frontal (Front)
+end;
+
+procedure TRubiksCubeObject.FPrim();
+begin
+  // Implementación de la rotación inversa de la capa frontal (Front)
+end;
+
+procedure TRubiksCubeObject.B();
+begin
+  // Implementación de la rotación de la capa posterior (Back)
+end;
+
+procedure TRubiksCubeObject.BPrim();
+begin
+  // Implementación de la rotación inversa de la capa posterior (Back)
+end;
+
+procedure TRubiksCubeObject.R();
+begin
+  // Implementación de la rotación de la capa derecha (Right)
+end;
+
+procedure TRubiksCubeObject.RPrim();
+begin
+  // Implementación de la rotación inversa de la capa derecha (Right)
+end;
+
+procedure TRubiksCubeObject.L();
+begin
+  // Implementación de la rotación de la capa izquierda (Left)
+end;
+
+procedure TRubiksCubeObject.LPrim();
+begin
+  // Implementación de la rotación inversa de la capa izquierda (Left)
+end;
+
 
 
 
