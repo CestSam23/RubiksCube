@@ -43,9 +43,13 @@ begin
   cubito := TPiezaCubo.Create(3,3,3,20);
   cubito2 := TPiezaCubo.Create(1,1,1,20);
   cubito3 := TPiezaCubo.Create(3,1,1,20);
-  cubito.paint(image1.Canvas);
-  cubito2.paint(Image1.Canvas);
-  cubito3.paint(image1.canvas);
+
+
+  cubito.rotateOny(10);
+  cubito.rotateOnZ(-10);
+  cubito.rotateOnX(-10);
+  cubito.paint(Image1.Canvas);
+
 end;
 
 end.

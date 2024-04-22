@@ -118,17 +118,52 @@ begin
 end;
 
 procedure TPiezaCubo.rotateOnX(alpha: Real);
-begin
+var
+  i : integer;
+  yAux, zAux: Real;
 
+begin
+  alpha:=(alpha*Pi)/180;
+
+  for i := 1 to 10 do
+    begin
+      yAux := (toPaintCube[i].y * COS( -alpha )) + (toPaintCube[i].z * SIN( -alpha ));
+      zAux := -(toPaintCube[i].y * SIN( -alpha )) + (toPaintCube[i].z * COS( -alpha ));
+      toPaintCube[i].y := yAux;
+      toPaintCube[i].z := zAux;
+    end;
+    
 end;
 
 procedure TPiezaCubo.rotateOnY(alpha: Real);
+var
+  i : integer;
+  xAux, zAux : Real;
 begin
+  alpha:=(alpha*Pi)/180;
+  for i:= 1 to 10 do
+    begin
+      xAux:= -(toPaintCube[i].z*SIN(-alpha)) + (toPaintCube[i].x*COS(-alpha));
+      zAux:= (toPaintCube[i].z*COS(-alpha)) + (toPaintCube[i].x*SIN(-alpha));
+      toPaintCube[i].x:=xAux;
+      toPaintCube[i].z:=zAux;
+    end;
 
 end;
 
 procedure TPiezaCubo.rotateOnZ(alpha: Real);
+var
+  i: integer;
+  xAux,yAux: Real;
 begin
+    alpha:=(alpha*PI)/180;
+  for i:= 1 to 10 do
+    begin
+      xAux:= (toPaintCube[i].x*COS(-alpha)) + (toPaintCube[i].y*SIN(-alpha));
+      yAux:= -(toPaintCube[i].x*SIN(-alpha)) + (toPaintCube[i].y*COS(-alpha));
+      toPaintCube[i].x:=xAux;
+      toPaintCube[i].y:=yAux;
+    end;
 
 end;
 
@@ -232,6 +267,7 @@ begin
       toPaintCube[i].z := temporalCube[i].z;
     end;
 end;
+
 
 
 end.
