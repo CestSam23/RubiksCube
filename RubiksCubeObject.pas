@@ -173,9 +173,29 @@ procedure TRubiksCubeObject.U();
 var
   temporal : TPiezaCubo;
 begin
-  temporal := cube[0,1,0];
-//  cube[0,1,0] :=
-  // Implementación de la rotación de la capa superior (Up)
+  temporal := cube[0,0,1];
+  cube[0,0,1] := cube[0,1,0];
+  cube[0,1,0] := cube [0,2,1];
+  cube[0,2,1] := cube [0,1,2];
+  cube[0,1,2] := temporal;
+
+  temporal := cube[0,0,2];
+  cube[0,0,2] := cube[0,0,0];
+  cube[0,0,0] := cube[0,2,0];
+  cube[0,2,0] := cube[0,2,2];
+  cube[0,2,2] := temporal;
+
+  cube[0,1,0].rotateOnY(-90);
+  cube[0,2,1].rotateOnY(-90);
+  cube[0,1,2].rotateOnY(-90);
+  cube[0,0,1].rotateOnY(-90);
+  cube[0,0,0].rotateOnY(-90);
+  cube[0,2,0].rotateOnY(-90);
+  cube[0,2,2].rotateOnY(-90);
+  cube[0,0,2].rotateOnY(-90);
+
+
+  paint();
 
 end;
 
