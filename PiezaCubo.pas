@@ -3,8 +3,8 @@ unit PiezaCubo;
 interface
 
 uses
-  Graphics;
-
+  Graphics,
+  Types;
 type
   TPoint3d = packed record
     x: Real;
@@ -18,6 +18,7 @@ type
       temporalCube : array[1..10] of TPoint3d;
       toPaintCube : array[1..10] of TPoint3d;
       originPosition : TPoint3d;
+      position : TPoint3d;
       procedure copyOnTemporal();
       procedure copyOnToPaint();
     public
@@ -162,8 +163,49 @@ begin
 end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
+var
+  P,Q : TPoint;
+  i : Integer;
 begin
   //Aplica traslacion 2d al cubo
+  for i := 1 to 4 do
+    begin
+      P.x := round(originCube[i].x + position.x);
+      p.y := round(originCube[i].y + position.y);
+      q.x := round(originCube[i+1].x + position.x);
+      q.y := round(originCube[i+1].y + position.y);
+      ACanvas.Pen.Color := clBlue; // Cara azul
+      ACanvas.pen.width := 3;
+      ACanvas.MoveTo(P.x, P.y);
+      ACanvas.LineTo(Q.x, Q.y);
+      ACanvas.Pen.Color := clBlack;
+    end;
+
+  for i := 6 to 9 do
+    begin
+      P.x := round(originCube[i].x + position.x);
+      p.y := round(originCube[i].y + position.y);
+      q.x := round(originCube[i+1].x + position.x);
+      q.y := round(originCube[i+1].y + position.y);
+      ACanvas.Pen.Color := clRed; // Cara azul
+      ACanvas.pen.width := 3;
+      ACanvas.MoveTo(P.x, P.y);
+      ACanvas.LineTo(Q.x, Q.y);
+      ACanvas.Pen.Color := clBlack;
+    end;
+
+  for i := 1 to 4 do
+    begin
+      P.x := round(originCube[i].x + position.x);
+      p.y := round(originCube[i].y + position.y);
+      q.x := round(originCube[i+5].x + position.x);
+      q.y := round(originCube[i+5].y + position.y);
+      ACanvas.Pen.Color := clGreen; // Cara azul
+      ACanvas.pen.width := 3;
+      ACanvas.MoveTo(P.x, P.y);
+      ACanvas.LineTo(Q.x, Q.y);
+      ACanvas.Pen.Color := clBlack;
+    end;
 
 end;
 
