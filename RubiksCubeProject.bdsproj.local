@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/04/21 18:02:34.665.pas,C:\Users\samfe\Documents\Borland Studio Projects\Unit1.pas=D:\Documents\Proyectos\RubiksCube\RubiksCube.pas</Transaction>
+    <Transaction>2024/04/21 18:02:34.665.dfm,C:\Users\samfe\Documents\Borland Studio Projects\Unit1.dfm=D:\Documents\Proyectos\RubiksCube\RubiksCube.dfm</Transaction>
+    <Transaction>2024/04/21 18:02:42.505.bdsproj,C:\Users\samfe\Documents\Borland Studio Projects\Project2.bdsproj=D:\Documents\Proyectos\RubiksCube\RubiksCubeProject.bdsproj</Transaction>
+  </Transactions>
+</BorlandProject>
