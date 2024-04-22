@@ -164,50 +164,50 @@ end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
 var
-  P,Q : TPoint;
-  i : Integer;
+  P, Q: TPoint;
+  i: Integer;
 begin
-  //Aplica traslacion 2d al cubo
+  // Aplica traslación 2D al cubo
   for i := 1 to 4 do
-    begin
-      P.x := round(originCube[i].x + position.x);
-      p.y := round(originCube[i].y + position.y);
-      q.x := round(originCube[i+1].x + position.x);
-      q.y := round(originCube[i+1].y + position.y);
-      ACanvas.Pen.Color := clBlue; // Cara azul
-      ACanvas.pen.width := 3;
-      ACanvas.MoveTo(P.x, P.y);
-      ACanvas.LineTo(Q.x, Q.y);
-      ACanvas.Pen.Color := clBlack;
-    end;
+  begin
+    P.x := Round(toPaintCube[i].x + position.x);
+    P.y := Round(toPaintCube[i].y + position.y);
+    Q.x := Round(toPaintCube[i + 1].x + position.x);
+    Q.y := Round(toPaintCube[i + 1].y + position.y);
+    ACanvas.Pen.Color := clBlue; // Cara azul
+    ACanvas.Pen.Width := 3;
+    ACanvas.MoveTo(P.x, P.y);
+    ACanvas.LineTo(Q.x, Q.y);
+    ACanvas.Pen.Color := clBlack;
+  end;
 
   for i := 6 to 9 do
-    begin
-      P.x := round(originCube[i].x + position.x);
-      p.y := round(originCube[i].y + position.y);
-      q.x := round(originCube[i+1].x + position.x);
-      q.y := round(originCube[i+1].y + position.y);
-      ACanvas.Pen.Color := clRed; // Cara azul
-      ACanvas.pen.width := 3;
-      ACanvas.MoveTo(P.x, P.y);
-      ACanvas.LineTo(Q.x, Q.y);
-      ACanvas.Pen.Color := clBlack;
-    end;
+  begin
+    P.x := Round(toPaintCube[i].x + position.x);
+    P.y := Round(toPaintCube[i].y + position.y);
+    Q.x := Round(toPaintCube[i + 1].x + position.x);
+    Q.y := Round(toPaintCube[i + 1].y + position.y);
+    ACanvas.Pen.Color := clRed; // Cara roja
+    ACanvas.Pen.Width := 3;
+    ACanvas.MoveTo(P.x, P.y);
+    ACanvas.LineTo(Q.x, Q.y);
+    ACanvas.Pen.Color := clBlack;
+  end;
 
   for i := 1 to 4 do
-    begin
-      P.x := round(originCube[i].x + position.x);
-      p.y := round(originCube[i].y + position.y);
-      q.x := round(originCube[i+5].x + position.x);
-      q.y := round(originCube[i+5].y + position.y);
-      ACanvas.Pen.Color := clGreen; // Cara azul
-      ACanvas.pen.width := 3;
-      ACanvas.MoveTo(P.x, P.y);
-      ACanvas.LineTo(Q.x, Q.y);
-      ACanvas.Pen.Color := clBlack;
-    end;
-
+  begin
+    P.x := Round(toPaintCube[i].x + position.x);
+    P.y := Round(toPaintCube[i].y + position.y);
+    Q.x := Round(toPaintCube[i + 5].x + position.x);
+    Q.y := Round(toPaintCube[i + 5].y + position.y);
+    ACanvas.Pen.Color := clGreen; // Cara verde
+    ACanvas.Pen.Width := 3;
+    ACanvas.MoveTo(P.x, P.y);
+    ACanvas.LineTo(Q.x, Q.y);
+    ACanvas.Pen.Color := clBlack;
+  end;
 end;
+
 
 procedure TPiezaCubo.copyOnTemporal;
 var

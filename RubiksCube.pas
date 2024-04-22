@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls, PiezaCubo;
 
 type
   TForm1 = class(TForm)
@@ -22,6 +22,7 @@ type
     Button10: TButton;
     Button11: TButton;
     Button12: TButton;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,5 +35,17 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  cubito,cubito2,cubito3 : TPiezaCubo;
+begin
+  cubito := TPiezaCubo.Create(3,3,3,20);
+  cubito2 := TPiezaCubo.Create(1,1,1,20);
+  cubito3 := TPiezaCubo.Create(3,1,1,20);
+  cubito.paint(image1.Canvas);
+  cubito2.paint(Image1.Canvas);
+  cubito3.paint(image1.canvas);
+end;
 
 end.
