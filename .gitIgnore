@@ -1,5 +1,23 @@
-.exe
-.dcu
-CuboRubik.dcu
-CuboRubikProject.exe
+# Archivos compilados por el compilador de Delphi
+*.dcu
+
+# Archivos ejecutables y de recursos compilados
+*.exe
+*.res
+
+# Directorio de historial creado por el IDE de Delphi
 __history/
+
+# Archivos de respaldo o temporales
+*.bak
+*.~*
+
+# Otros archivos generados por el IDE o el sistema operativo
+*.local
+*.identcache
+*.dsk
+*.ini
+
+# Otros archivos y directorios generados por el sistema operativo
+.DS_Store
+Thumbs.db
