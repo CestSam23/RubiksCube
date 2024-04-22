@@ -12,11 +12,15 @@ type
     private
       cube: array[0..2, 0..2, 0..2] of TPiezaCubo;
       center : TPoint;
+      canva  : TCanvas;
+
     public
       constructor Create; overload;
-      constructor Create(x,y:Integer); overload;
-      procedure paint(ACanvas:TCanvas);
-      procedure YAxisRotate(Acanvas:TCanvas);
+      constructor Create(x,y:Integer; ACanvas:TCanvas); overload;
+      procedure paint();
+      procedure YAxisRotate();
+      procedure XAxisRotate();
+      procedure zAxisRotate();
   end;
 implementation
 
@@ -25,7 +29,7 @@ begin
 
 end;
 
-constructor TRubiksCubeObject.Create(x: Integer; y: Integer);
+constructor TRubiksCubeObject.Create(x: Integer; y: Integer; ACanvas:TCanvas);
 var
   i,j,k : integer;
 begin
@@ -64,6 +68,7 @@ begin
 
   center.x := x;
   center.y := y;
+  canva := ACanvas;
   for i := 0 to 2 do
     begin
       for j := 0 to 2 do
@@ -78,18 +83,18 @@ begin
 
 end;
 
-procedure TRubiksCubeObject.paint(ACanvas: TCanvas);
+procedure TRubiksCubeObject.paint();
 var
 i,j,k:integer;
 begin
-  Acanvas.Rectangle(-10,-10,1000,1000);
+  canva.Rectangle(-10,-10,1000,1000);
   for i := 0 to 2 do
     begin
       for j := 0 to 2 do
         begin
           for k:=0 to 2 do
             begin
-              cube[i,j,k].paint(Acanvas);
+              cube[i,j,k].paint(canva);
             end;
 
         end;
@@ -97,7 +102,7 @@ begin
 end;
 
 
-procedure TRubiksCubeObject.YAxisRotate(ACanvas :TCanvas);
+procedure TRubiksCubeObject.YAxisRotate();
 var
 i,j,k:Integer;
 begin
@@ -108,7 +113,43 @@ begin
           for k:=0 to 2 do
             begin
               cube[i,j,k].rotateOny(5);
-              paint(ACanvas);
+              paint();
+            end;
+
+        end;
+    end;
+end;
+
+procedure TRubiksCubeObject.XAxisRotate;
+var
+i,j,k:Integer;
+begin
+  for i := 0 to 2 do
+    begin
+      for j := 0 to 2 do
+        begin
+          for k:=0 to 2 do
+            begin
+              cube[i,j,k].rotateOnx(5);
+              paint();
+            end;
+
+        end;
+    end;
+end;
+
+procedure TRubiksCubeObject.zAxisRotate;
+var
+i,j,k:Integer;
+begin
+  for i := 0 to 2 do
+    begin
+      for j := 0 to 2 do
+        begin
+          for k:=0 to 2 do
+            begin
+              cube[i,j,k].rotateOnz(5);
+              paint();
             end;
 
         end;

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, PiezaCubo;
+  Dialogs, StdCtrls, ExtCtrls, PiezaCubo,RubiksCubeObject;
 
 type
   TForm1 = class(TForm)
@@ -22,7 +22,14 @@ type
     Button10: TButton;
     Button11: TButton;
     Button12: TButton;
-    procedure Button1Click(Sender: TObject);
+    Panel2: TPanel;
+    Button13: TButton;
+    Button14: TButton;
+    Button15: TButton;
+    procedure Button15Click(Sender: TObject);
+    procedure Button14Click(Sender: TObject);
+    procedure Button13Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,25 +38,31 @@ type
 
 var
   Form1: TForm1;
+  Cube : TRubiksCubeObject;
 
 implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
-var
-  cubito,cubito2,cubito3 : TPiezaCubo;
+procedure TForm1.Button13Click(Sender: TObject);
 begin
-  cubito := TPiezaCubo.Create(3,3,3,20);
-  cubito2 := TPiezaCubo.Create(1,1,1,20);
-  cubito3 := TPiezaCubo.Create(3,1,1,20);
+  cube.XAxisRotate;
+end;
 
+procedure TForm1.Button14Click(Sender: TObject);
+begin
+cube.YAxisRotate;
+end;
 
-  cubito.rotateOny(10);
-  cubito.rotateOnZ(-10);
-  cubito.rotateOnX(-10);
-  cubito.paint(Image1.Canvas);
+procedure TForm1.Button15Click(Sender: TObject);
+begin
+  cube.zAxisRotate;
+end;
 
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  cube := TRubiksCubeObject.Create(100,100,image1.Canvas);
+  Cube.paint();
 end;
 
 end.
