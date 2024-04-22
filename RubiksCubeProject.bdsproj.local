@@ -4,5 +4,8 @@
     <Transaction>2024/04/21 18:02:34.665.pas,C:\Users\samfe\Documents\Borland Studio Projects\Unit1.pas=D:\Documents\Proyectos\RubiksCube\RubiksCube.pas</Transaction>
     <Transaction>2024/04/21 18:02:34.665.dfm,C:\Users\samfe\Documents\Borland Studio Projects\Unit1.dfm=D:\Documents\Proyectos\RubiksCube\RubiksCube.dfm</Transaction>
     <Transaction>2024/04/21 18:02:42.505.bdsproj,C:\Users\samfe\Documents\Borland Studio Projects\Project2.bdsproj=D:\Documents\Proyectos\RubiksCube\RubiksCubeProject.bdsproj</Transaction>
+    <Transaction>2024/04/21 18:11:12.574.pas,D:\Documents\Proyectos\RubiksCube\Unit1.pas=D:\Documents\Proyectos\RubiksCube\TRubiksCube.pas</Transaction>
+    <Transaction>2024/04/21 18:12:23.397.pas,D:\Documents\Proyectos\RubiksCube\Unit1.pas=D:\Documents\Proyectos\RubiksCube\PiezaCubo.pas</Transaction>
+    <Transaction>2024/04/21 18:21:28.153.pas,D:\Documents\Proyectos\RubiksCube\TRubiksCube.pas=D:\Documents\Proyectos\RubiksCube\RubiksCubeObject.pas</Transaction>
   </Transactions>
 </BorlandProject>

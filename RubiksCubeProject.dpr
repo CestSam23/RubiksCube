@@ -2,7 +2,9 @@ program RubiksCubeProject;
 
 uses
   Forms,
-  RubiksCube in 'RubiksCube.pas' {Form1};
+  RubiksCube in 'RubiksCube.pas' {Form1},
+  RubiksCubeObject in 'RubiksCubeObject.pas',
+  PiezaCubo in 'PiezaCubo.pas';
 
 {$R *.res}
 
