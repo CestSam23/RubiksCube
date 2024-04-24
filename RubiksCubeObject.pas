@@ -11,8 +11,11 @@ type
   TRubiksCubeObject = class
     private
       cube: array[0..2, 0..2, 0..2] of TPiezaCubo;
+      hasRotated : TPoint3d;
       center : TPoint;
       canva  : TCanvas;
+      procedure  returnToOriginal();
+      procedure returnToRotated();
 
     public
       constructor Create; overload;
@@ -91,7 +94,9 @@ begin
        end;
     end;
 
-
+  hasRotated.x := 0;
+  hasRotated.y := 0;
+  hasRotated.z := 0;
   center.x := x;
   center.y := y;
   canva := ACanvas;
@@ -133,7 +138,8 @@ begin
 
         end;
     end;
-                  paint();
+    hasRotated.y := hasRotated.y + 5;
+    paint();
 end;
 
 procedure TRubiksCubeObject.XAxisRotate;
@@ -151,6 +157,7 @@ begin
 
         end;
     end;
+    hasRotated.x := hasRotated.x + 5;
     paint;
 end;
 
@@ -169,13 +176,16 @@ begin
 
         end;
     end;
-                  paint();
+    hasRotated.z := hasRotated.z +5;
+    paint();
+
 end;
 
 procedure TRubiksCubeObject.U();
 var
   temporal : TPiezaCubo;
 begin
+
   temporal := cube[0,0,1];
   cube[0,0,1] := cube[0,1,0];
   cube[0,1,0] := cube [0,2,1];
@@ -188,16 +198,18 @@ begin
   cube[0,2,0] := cube[0,2,2];
   cube[0,2,2] := temporal;
 
-  cube[0,1,0].rotateOnY(-90);
-  cube[0,2,1].rotateOnY(-90);
-  cube[0,1,2].rotateOnY(-90);
-  cube[0,0,1].rotateOnY(-90);
-  cube[0,0,0].rotateOnY(-90);
-  cube[0,2,0].rotateOnY(-90);
-  cube[0,2,2].rotateOnY(-90);
-  cube[0,0,2].rotateOnY(-90);
+  returnToOriginal;
+//  cube[0,1,0].rotateOnY(-90);
+//  cube[0,2,1].rotateOnY(-90);
+//  cube[0,1,2].rotateOnY(-90);
+//  cube[0,0,1].rotateOnY(-90);
+//  cube[0,0,0].rotateOnY(-90);
+//  cube[0,2,0].rotateOnY(-90);
+//  cube[0,2,2].rotateOnY(-90);
+//  cube[0,0,2].rotateOnY(-90);
 
 
+//  returnToRotated;
   paint();
 
 end;
@@ -257,6 +269,43 @@ begin
   // Implementación de la rotación inversa de la capa izquierda (Left)
 end;
 
+procedure TRubiksCubeObject.returnToOriginal;
+var
+i,j,k:Integer;
+begin
+  for i := 0 to 2 do
+    begin
+      for j := 0 to 2 do
+        begin
+          for k:=0 to 2 do
+            begin
+              //cube[i,j,k].rotateOnX(-hasRotated.x);
+             // cube[i,j,k].rotateOnY(-hasRotated.y);
+              //cube[i,j,k].rotateOnz(-hasRotated.z);
+            end;
+
+        end;
+    end;
+end;
+
+procedure TRubiksCubeObject.returnToRotated;
+var
+i,j,k:Integer;
+begin
+  for i := 0 to 2 do
+    begin
+      for j := 0 to 2 do
+        begin
+          for k:=0 to 2 do
+            begin
+              cube[i,j,k].rotateOnX(+hasRotated.x);
+              cube[i,j,k].rotateOnY(+hasRotated.y);
+              cube[i,j,k].rotateOnz(+hasRotated.z);
+            end;
+
+        end;
+    end;
+end;
 
 
 

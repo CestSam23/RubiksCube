@@ -37,6 +37,7 @@ type
       procedure paintDown();
       procedure paintUp();
       procedure paint(ACanvas: TCanvas);
+      function getposition():TPoint3D;
   end;
 
 implementation
@@ -274,6 +275,13 @@ begin
       toPaintCube[i].y := temporalCube[i].y;
       toPaintCube[i].z := temporalCube[i].z;
     end;
+end;
+
+function TPiezaCubo.getposition;
+begin
+  result.x := self.originPosition.x;
+  result.y := self.originPosition.y;
+  result.z := self.originPosition.z;
 end;
 
 
