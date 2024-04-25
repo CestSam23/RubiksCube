@@ -19,6 +19,15 @@ type
       toPaintCube : array[1..10] of TPoint3d;
       originPosition : TPoint3d;
       position : TPoint3d;
+
+      //New form of implementing the cubes
+      Face : Array[0..5,0..3] of TPoint3d;
+      ColorOfFace : Array[0..5] of TColor;
+      Distance : array[0..5] of Real;
+      Order : array[0..5] of Integer;
+      ScreenFace : array[0..3] of TPoint;
+
+
       procedure copyOnTemporal();
       procedure copyOnToPaint();
     public
@@ -68,10 +77,23 @@ begin
 end;
 
 constructor TPiezaCubo.Create(x: Integer; y: Integer; z: Integer; factor: Real);
+
+function Point3d(X,Y,Z: Integer) : TPoint3d;
+begin
+  Result.x := x;
+  Result.y := y;
+  Result.z := z;
+end;
+
 var
   TamFig : real;
   i: integer;
 begin
+
+
+  
+
+
   //Initialize the points and creates the neccesary to create a cube of 1by1
   TamFig := 1;
   originCube[1].x:= +TamFig;   originCube[1].y:= +TamFig;   originCube[1].z:= -TamFig;
