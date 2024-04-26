@@ -87,13 +87,60 @@ end;
 
 var
   TamFig : real;
-  i: integer;
+  i, j: integer;
 begin
 
 
-  
+  //Down
+  Face[0,0] := Point3d(-1,1,-1);
+  Face[0,1] := Point3d(1,1,-1);
+  Face[0,2] := Point3d(1,-1,-1);
+  Face[0,3] := Point3d(-1,-1,-1);
+
+  //Up
+  Face[1,0] := Point3d(-1,1,1);
+  Face[1,1] := Point3d(-1,-1,1);
+  Face[1,2] := Point3d(1,-1,1);
+  Face[1,3] := Point3d(1,1,1);
+
+  //Left
+  Face[2,0] := Point3d(-1,-1,1);
+  Face[2,1] := Point3d(-1,-1,-1);
+  Face[2,2] := Point3d(1,-1,-1);
+  Face[2,3] := Point3d(1,-1,1);
+
+  //Front
+  Face[3,0] := Point3d(1,-1,1);
+  Face[3,1] := Point3d(1,-1,-1);
+  Face[3,2] := Point3d(1,1,-1);
+  Face[3,3] := Point3d(1,1,1);
+
+  //Right
+  Face[4,0] := Point3d(1,1,1);
+  Face[4,1] := Point3d(1,1,-1);
+  Face[4,2] := Point3d(-1,1,-1);
+  Face[4,3] := Point3d(-1,1,1);
+
+  //Back
+  Face[5,0] := Point3d(-1,1,1);
+  Face[5,1] := Point3d(-1,1,-1);
+  Face[5,2] := Point3d(-1,-1,-1);
+  Face[5,3] := Point3d(-1,-1,1);
+
+  //Escalated the cube by a factor of x, and traslates it to the wished position(Origin)
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        Face[i,j].x := (Face[i,j].x*factor) + (x*factor);
+        Face[i,j].y := (Face[i,j].y*factor) + (y*factor);
+        Face[i,j].z := (Face[i,j].z*factor) + (z*factor);
+      end;
+
+      OriginPosition.x := x*factor; OriginPosition.y := y*factor; OriginPosition.z := z*factor;
+      
 
 
+  //We cant delete this lines, yet. But will be deleted when the code update is finished
   //Initialize the points and creates the neccesary to create a cube of 1by1
   TamFig := 1;
   originCube[1].x:= +TamFig;   originCube[1].y:= +TamFig;   originCube[1].z:= -TamFig;
@@ -136,25 +183,26 @@ begin
 end;
 
 procedure TPiezaCubo.rotateOnCenter(alphaX: Real; alphaY: Real; Alphaz: Real);
-var
-  i : integer;
-  xAux, yAux, zAux: Real;
 begin
-  alphaX:=(alphaX*Pi)/180;
-  alphaY:=(alphaY*Pi)/180;
-  alphaZ:=(alphaZ*Pi)/180;
-
-
 
 end;
 
 procedure TPiezaCubo.rotateOnX(alpha: Real);
 var
-  i : integer;
+  i,j : integer;
   yAux, zAux: Real;
 
 begin
   alpha:=(alpha*Pi)/180;
+
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        yAux := (face[i,j].y * COS(-alpha) + face[i,j].z*SIN(-alpha));
+        zAux:= (face[i,j].y*sin(-alpha) + face[i,j].z*COS(-alpha));
+        face[i,j].y := yAux;
+        face[i,j].z := zAux;
+      end;
 
   for i := 1 to 10 do
     begin
