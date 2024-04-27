@@ -119,8 +119,8 @@ begin
         Face[i,j].y := (Face[i,j].y*factor) + (y*factor);
         Face[i,j].z := (Face[i,j].z*factor) + (z*factor);
       end;
-      ojoAObjeto := 4*factor;
-      ojoAPantalla := 20;
+      ojoAObjeto := 20*4;
+      ojoAPantalla := 20*3;
       OriginPosition.x := x*factor; OriginPosition.y := y*factor; OriginPosition.z := z*factor;
 
 end;
@@ -234,10 +234,9 @@ procedure TPiezaCubo.paint(ACanvas: TCanvas);
   begin
     zAux := ojoAObjeto + z;
     xAux := (OjoAPantalla*x)/zAux;
-    xP := Round(xAux*2) + 250;    //Pendiente xPantalla, yPantalla
+    xP := Round(xAux+position.x);    //Pendiente xPantalla, yPantalla
     yAux := (OjoAPAntalla*y) / zAux;
-    yP := round(yAUx*2) + 250;
-
+    yP := round(yAUx+position.y);
   end;
 
 var
