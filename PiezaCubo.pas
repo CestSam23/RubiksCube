@@ -26,7 +26,8 @@ type
       Distance : array[0..5] of Real;
       Order : array[0..5] of Integer;
       ScreenFace : array[0..3] of TPoint;
-
+      OjoAObjeto, OjoAPantalla : Real;
+      procedure orderPlanes();
 
       procedure copyOnTemporal();
       procedure copyOnToPaint();
@@ -194,7 +195,7 @@ var
 
 begin
   alpha:=(alpha*Pi)/180;
-
+  //New method to rotate
   for i := 0 to 5 do
     for j := 0 to 3 do
       begin
@@ -203,7 +204,7 @@ begin
         face[i,j].y := yAux;
         face[i,j].z := zAux;
       end;
-
+  //Old method
   for i := 1 to 10 do
     begin
       yAux := (toPaintCube[i].y * COS( -alpha )) + (toPaintCube[i].z * SIN( -alpha ));
@@ -216,10 +217,20 @@ end;
 
 procedure TPiezaCubo.rotateOnY(alpha: Real);
 var
-  i : integer;
+  i,j : integer;
   xAux, zAux : Real;
 begin
   alpha:=(alpha*Pi)/180;
+
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        xAux:= -(face[i,j].z*SIN(-alpha)) + (face[i,j].x*COS(-alpha));
+        zAux:= (face[i,j].z*COS(-alpha)) + (face[i,j].x*SIN(-alpha));
+        face[i,j].x:=xAux;
+        face[i,j].z:=zAux;
+      end;
+
   for i:= 1 to 10 do
     begin
       xAux:= -(toPaintCube[i].z*SIN(-alpha)) + (toPaintCube[i].x*COS(-alpha));
@@ -232,10 +243,20 @@ end;
 
 procedure TPiezaCubo.rotateOnZ(alpha: Real);
 var
-  i: integer;
+  i,j: integer;
   xAux,yAux: Real;
 begin
     alpha:=(alpha*PI)/180;
+
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        xAux:= (face[i,j].x*COS(-alpha)) + (face[i,j].y*SIN(-alpha));
+        yAux:= -(face[i,j].x*SIN(-alpha)) + (face[i,j].y*COS(-alpha));
+        face[i,j].x:=xAux;
+        face[i,j].y:=yAux;
+      end;
+
   for i:= 1 to 10 do
     begin
       xAux:= (toPaintCube[i].x*COS(-alpha)) + (toPaintCube[i].y*SIN(-alpha));
@@ -277,10 +298,17 @@ begin
 end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
+
+
+
+
 var
   P, Q: TPoint;
   i: Integer;
 begin
+
+
+
   // Aplica traslación 2D al cubo
   for i := 1 to 4 do
   begin
@@ -352,6 +380,39 @@ begin
   result.x := self.originPosition.x;
   result.y := self.originPosition.y;
   result.z := self.originPosition.z;
+end;
+
+procedure TPiezaCubo.orderPlanes;
+var
+  i,j,auxOrder : Integer;
+  xAux,yAux,zAux,auxDistancia : Real;
+begin
+  //Calcula punto medio y distancia al observador
+  for i := 0 to 5 do
+    begin
+      order[i] := i;
+      xAux := (face[i,0].x + face[i,2].x) / 2;
+      yAux := (face[i,0].y + face[i,2].y) / 2;
+      zAux := (face[i,0].z + face[i,2].z) / 2 + OjoAObjeto;
+      Distance[i] := sqrt((xAux*xAux)+(yAux*yAux)+(zAux*zAux));
+    end;
+
+    //Ordena planos en base a distancia, de mayor a menor
+    for i := 0 to 5 do
+      for j := 0 to 4 do
+        begin
+          if(distance[j]<distance[j+1])then
+          begin
+            auxDistancia := distance[j];
+            auxOrder := order[j];
+            distance[j] := distance[j+1];
+            order[j] := order[j+1];
+            distance[j+1] := auxDistancia;
+            order[j+1] := auxOrder;
+          end;
+        end;
+      
+
 end;
 
 
