@@ -22,7 +22,9 @@ type
       ColorOfFace : Array[0..5] of TColor;
       Distance : array[0..5] of Real;
       Order : array[0..5] of Integer;
+      caraPant : array[0..3] of TPoint;
       ScreenFace : array[0..3] of TPoint;
+      p,Q : TPoint;
       OjoAObjeto, OjoAPantalla : Real;
       procedure orderPlanes();
 
@@ -64,6 +66,13 @@ end;
 var
   i, j: integer;
 begin
+
+  colorOfFace[0] := clRed;
+  colorOfFace[1] := clGreen;
+  colorOfFace[2] := clBlue;
+  colorOfFace[3] := clYellow;
+  colorOfFace[4] := clAqua;
+  colorOfFace[5] := clFuchsia;
 
 
   //Down
@@ -110,7 +119,8 @@ begin
         Face[i,j].y := (Face[i,j].y*factor) + (y*factor);
         Face[i,j].z := (Face[i,j].z*factor) + (z*factor);
       end;
-
+      ojoAObjeto := 4*factor;
+      ojoAPantalla := 20;
       OriginPosition.x := x*factor; OriginPosition.y := y*factor; OriginPosition.z := z*factor;
 
 end;
@@ -217,8 +227,37 @@ begin
 end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
-begin
 
+  procedure Perspectiva(x,y,z: Real; var xP, yP : integer);
+  var
+    xAux,yAux,zAux : Real;
+  begin
+    zAux := ojoAObjeto + z;
+    xAux := (OjoAPantalla*x)/zAux;
+    xP := Round(xAux*2) + 250;    //Pendiente xPantalla, yPantalla
+    yAux := (OjoAPAntalla*y) / zAux;
+    yP := round(yAUx*2) + 250;
+
+  end;
+
+var
+i,j,k : integer;
+begin
+  ACanvas.Pen.Color:=cLBlack;
+  ACanvas.Rectangle(-100,-100,1000,1000);
+  acanvas.Pen.Width := 2;
+  self.orderPlanes;
+
+  for k := 0 to 5 do
+    begin
+      i := order[k];
+      for j := 0 to 3 do perspectiva(face[i,j].x,face[i,j].y,face[i,j].z,caraPant[j].X,caraPant[j].y);
+      Acanvas.Brush.Color:= ColorofFace[i];
+      ACanvas.Polygon(CaraPant);
+    end;
+
+    acanvas.Brush.Color := ClWhite;
+    
 
 end;
 
