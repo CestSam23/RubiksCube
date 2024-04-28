@@ -7,5 +7,6 @@
     <Transaction>2024/04/21 18:11:12.574.pas,D:\Documents\Proyectos\RubiksCube\Unit1.pas=D:\Documents\Proyectos\RubiksCube\TRubiksCube.pas</Transaction>
     <Transaction>2024/04/21 18:12:23.397.pas,D:\Documents\Proyectos\RubiksCube\Unit1.pas=D:\Documents\Proyectos\RubiksCube\PiezaCubo.pas</Transaction>
     <Transaction>2024/04/21 18:21:28.153.pas,D:\Documents\Proyectos\RubiksCube\TRubiksCube.pas=D:\Documents\Proyectos\RubiksCube\RubiksCubeObject.pas</Transaction>
+    <Transaction>2024/04/28 11:53:06.790.pas,D:\Documents\Proyectos\RubiksCube\Unit1.pas=D:\Documents\Proyectos\RubiksCube\RotationRegistry.pas</Transaction>
   </Transactions>
 </BorlandProject>

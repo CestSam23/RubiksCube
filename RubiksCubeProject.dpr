@@ -4,7 +4,8 @@ uses
   Forms,
   RubiksCube in 'RubiksCube.pas' {Form1},
   RubiksCubeObject in 'RubiksCubeObject.pas',
-  PiezaCubo in 'PiezaCubo.pas';
+  PiezaCubo in 'PiezaCubo.pas',
+  RotationRegistry in 'RotationRegistry.pas';
 
 {$R *.res}
 

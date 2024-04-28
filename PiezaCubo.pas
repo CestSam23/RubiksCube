@@ -16,15 +16,16 @@ type
     private
       originPosition : TPoint3d;
       position : TPoint3d;
+      rotated : TPoint3d;
 
       //New form of implementing the cubes
       Face : Array[0..5,0..3] of TPoint3d;
+      originalPosition : Array[0..5,0..3] of TPoint3d;
+      lastPosition : Array[0..5,0..3] of TPoint3d;
       ColorOfFace : Array[0..5] of TColor;
       Distance : array[0..5] of Real;
       Order : array[0..5] of Integer;
       caraPant : array[0..3] of TPoint;
-      ScreenFace : array[0..3] of TPoint;
-      p,Q : TPoint;
       OjoAObjeto, OjoAPantalla : Real;
       procedure orderPlanes();
 
@@ -34,6 +35,9 @@ type
       procedure scaleBy(factor :Real);
       procedure traslate(x, y, z : Integer);
       procedure rotateOnCenter(alphaX, alphaY, alphaZ:Real);
+      procedure rotateLayerX(alpha: Real);
+      procedure rotateLayerY(alpha:Real);
+      procedure rotateLayerZ(alpha:Real);
       procedure rotateOnX(alpha: Real);
       procedure rotateOnY(alpha: Real);
       procedure rotateOnZ(alpha: Real);
@@ -44,6 +48,9 @@ type
       procedure paintDown();
       procedure paintUp();
       procedure paint(ACanvas: TCanvas);
+      procedure rotateOnCustomAxis(alpha, axisX, AxisY, AxisZ : Real);
+      procedure resetOriginal();
+      procedure resetRotated(x,y,z:Real);
       function getposition():TPoint3D;
       function getDistance():Real;
   end;
@@ -68,13 +75,16 @@ var
   i, j: integer;
 begin
 
-  colorOfFace[0] := clRed;
-  colorOfFace[1] := clGreen;
-  colorOfFace[2] := clBlue;
-  colorOfFace[3] := clYellow;
-  colorOfFace[4] := clAqua;
-  colorOfFace[5] := clFuchsia;
+  rotated.x := 0; rotated.z := 0; rotated.y := 0;
 
+  colorOfFace[0] := clWhite;
+  colorOfFace[1] := clYellow;
+  colorOfFace[2] := clBlue;
+  colorOfFace[3] := clRed;
+  colorOfFace[4] := clGreen;
+  colorOfFace[5] := clWebDarkOrange;
+
+  //0-Down; 1-Up; 2-Left; 3-Front; 4-Right; 5-Back;
 
   //Down
   Face[0,0] := Point3d(-1,1,-1);
@@ -119,6 +129,15 @@ begin
         Face[i,j].x := (Face[i,j].x*factor) + (x*factor);
         Face[i,j].y := (Face[i,j].y*factor) + (y*factor);
         Face[i,j].z := (Face[i,j].z*factor) + (z*factor);
+
+        OriginalPosition[i,j].x := face[i,j].x;
+        OriginalPosition[i,j].y := face[i,j].y;
+        OriginalPosition[i,j].z := face[i,j].z;
+
+        LastPosition[i,j].x := face[i,j].x;
+        LastPosition[i,j].y := face[i,j].y;
+        LastPosition[i,j].z := face[i,j].z;
+
       end;
       ojoAObjeto := 50*4;
       ojoAPantalla := 50*3;
@@ -153,6 +172,7 @@ var
 begin
   alpha:=(alpha*Pi)/180;
   //New method to rotate
+
   for i := 0 to 5 do
     for j := 0 to 3 do
       begin
@@ -160,6 +180,26 @@ begin
         zAux:= (-face[i,j].y*sin(-alpha) + face[i,j].z*COS(-alpha));
         face[i,j].y := yAux;
         face[i,j].z := zAux;
+      end;
+end;
+
+procedure TPiezaCubo.rotateLayerx(alpha: Real);
+var
+  i,j : integer;
+  yAux, zAux: Real;
+
+begin
+  alpha:=(alpha*Pi)/180;
+  //New method to rotate
+
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        yAux := (face[i,j].y * COS(-alpha) + face[i,j].z*SIN(-alpha));
+        zAux:= (-face[i,j].y*sin(-alpha) + face[i,j].z*COS(-alpha));
+        face[i,j].y := yAux;
+        face[i,j].z := zAux;
+        originalPosition[i,j] := face[i,j];
       end;
 end;
 
@@ -180,6 +220,28 @@ begin
       end;
 end;
 
+procedure TPiezaCubo.rotateLayerY(alpha: Real);
+var
+  i,j : integer;
+  xAux, zAux : Real;
+begin
+  alpha:=(alpha*Pi)/180;
+
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        xAux:= -(face[i,j].z*SIN(-alpha)) + (face[i,j].x*COS(-alpha));
+        zAux:= (face[i,j].z*COS(-alpha)) + (face[i,j].x*SIN(-alpha));
+        face[i,j].x:=xAux;
+        face[i,j].z:=zAux;
+
+        originalPosition[i,j] := face[i,j];
+      end;
+
+
+
+end;
+
 procedure TPiezaCubo.rotateOnZ(alpha: Real);
 var
   i,j: integer;
@@ -195,6 +257,11 @@ begin
         face[i,j].x:=xAux;
         face[i,j].y:=yAux;
       end;
+end;
+
+procedure TPiezaCubo.rotateLayerZ(alpha: Real);
+begin
+
 end;
 
 procedure TPiezaCubo.paintFront;
@@ -302,7 +369,7 @@ end;
 function TPiezaCubo.getDistance;
 var
   i,j: integer;
-  xAux,yAux,zAux, xAuxDistancia : Real;
+  xAux,yAux,zAux : Real;
 begin
   xAux := 0; yAux := 0; zAux := 0;
   for i := 0 to 5 do
@@ -314,6 +381,41 @@ begin
       end;
         xAux := xAux/24; yAux := yAux/24; zAux := zAux/24;
         result := sqrt((xAux*xAux)+(yAux*yAux)+(zAux*zAux));
+end;
+
+
+procedure TPiezaCubo.resetOriginal;
+var
+  i,j : Integer;
+begin
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        lastPosition[i,j].x := face[i,j].x;
+        lastPosition[i,j].y := face[i,j].y;
+        lastPosition[i,j].z := face[i,j].z;
+
+        face[i,j].x := originalPosition[i,j].x;
+        face[i,j].y := originalPosition[i,j].y;
+        face[i,j].z := originalPosition[i,j].z;
+      end;
+
+
+end;
+
+
+procedure TPIezaCubo.resetRotated(x:Real;y:Real;z:Real);
+var
+  i,j : Integer;
+  tempRotated : TPoint3d;
+begin
+  
+end;
+
+procedure TPiezaCubo.rotateOnCustomAxis(alpha: Real; axisX, axisY, axisZ: Real);
+
+begin
+
 end;
 
 

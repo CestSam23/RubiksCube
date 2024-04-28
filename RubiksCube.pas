@@ -67,7 +67,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  cube := TRubiksCubeObject.Create(100,100,image1.Canvas);
+  cube := TRubiksCubeObject.Create(200,150,image1.Canvas);
   Cube.paint();
 end;
 

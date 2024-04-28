@@ -5,37 +5,50 @@ interface
 uses
   Graphics,
   Types,
-  PiezaCubo;
+  PiezaCubo,
+  Classes,
+  RotationRegistry;
 
 type
   TRubiksCubeObject = class
     private
+      rotationRegistry : TList;
       cube: array[0..2, 0..2, 0..2] of TPiezaCubo;
+
       hasRotated : TPoint3d;
       center : TPoint;
       canva  : TCanvas;
-      procedure  returnToOriginal();
-      procedure returnToRotated();
+
+      procedure resetOriginal();
+      procedure returnRotated();
 
     public
       constructor Create; overload;
       constructor Create(x,y:Integer; ACanvas:TCanvas); overload;
+       destructor Destroy; override; // Destructor
       procedure paint();
       procedure YAxisRotate();
       procedure XAxisRotate();
       procedure zAxisRotate();
+
       procedure U();
       procedure UPrim();
+
       procedure D();
       procedure DPrim();
+
       procedure F();
       procedure FPrim();
+
       procedure B();
       procedure BPrim();
+
       procedure R();
       procedure RPrim();
+
       procedure L();
       procedure LPrim();
+
 
   end;
 implementation
@@ -45,10 +58,27 @@ begin
 
 end;
 
+destructor TRubiksCubeObject.Destroy;
+var
+  i: Integer;
+begin
+  // Liberar la memoria de cada objeto en la lista
+  for i := 0 to rotationRegistry.Count - 1 do
+  begin
+    TObject(rotationRegistry.Items[i]).Free;
+  end;
+  // Liberar la memoria de la lista
+  rotationRegistry.Free;
+  inherited;
+end;
+
+
 constructor TRubiksCubeObject.Create(x: Integer; y: Integer; ACanvas:TCanvas);
 var
   i,j,k : integer;
 begin
+
+  rotationRegistry := TList.Create;
   //Front face
   cube[0,0,0] := TPiezaCubo.Create(-2,-2,2,20);
   cube[0,1,0] := TPiezaCubo.Create(0,-2,2,20);
@@ -153,6 +183,7 @@ end;
 procedure TRubiksCubeObject.YAxisRotate();
 var
 i,j,k:Integer;
+Rotation : TRotationRegistry;
 begin
   for i := 0 to 2 do
     begin
@@ -165,13 +196,15 @@ begin
 
         end;
     end;
-    hasRotated.y := hasRotated.y + 5;
+    Rotation := TROtationRegistry.Create(0,5,0);
+    rotationRegistry.Add(rotation);
     paint();
 end;
 
 procedure TRubiksCubeObject.XAxisRotate;
 var
 i,j,k:Integer;
+rotation : TRotationRegistry;
 begin
   for i := 0 to 2 do
     begin
@@ -184,13 +217,15 @@ begin
 
         end;
     end;
-    hasRotated.x := hasRotated.x + 5;
+    Rotation := TROtationRegistry.Create(5,0,0);
+    rotationRegistry.Add(rotation);
     paint;
 end;
 
 procedure TRubiksCubeObject.zAxisRotate;
 var
 i,j,k:Integer;
+rotation : TRotationRegistry;
 begin
   for i := 0 to 2 do
     begin
@@ -203,16 +238,19 @@ begin
 
         end;
     end;
-    hasRotated.z := hasRotated.z +5;
-    paint();
+    Rotation := TROtationRegistry.Create(0,0,5);
+    rotationRegistry.Add(rotation);
+    paint;
 
 end;
 
 procedure TRubiksCubeObject.U();
 var
   temporal : TPiezaCubo;
+  i,j,k: integer;
 begin
 
+  resetOriginal;
   temporal := cube[0,0,1];
   cube[0,0,1] := cube[0,1,0];
   cube[0,1,0] := cube [0,2,1];
@@ -225,25 +263,24 @@ begin
   cube[0,2,0] := cube[0,2,2];
   cube[0,2,2] := temporal;
 
-  returnToOriginal;
-//  cube[0,1,0].rotateOnY(-90);
-//  cube[0,2,1].rotateOnY(-90);
-//  cube[0,1,2].rotateOnY(-90);
-//  cube[0,0,1].rotateOnY(-90);
-//  cube[0,0,0].rotateOnY(-90);
-//  cube[0,2,0].rotateOnY(-90);
-//  cube[0,2,2].rotateOnY(-90);
-//  cube[0,0,2].rotateOnY(-90);
+  cube[0,1,0].rotateLayerY(90);
+  cube[0,2,1].rotateLayerY(90);
+  cube[0,1,2].rotateLayerY(90);
+  cube[0,0,1].rotateLayerY(90);
+  cube[0,0,0].rotateLayerY(90);
+  cube[0,2,0].rotateLayerY(90);
+  cube[0,2,2].rotateLayerY(90);
+  cube[0,0,2].rotateLayerY(90);
+  cube[0,1,1].rotateLayerY(90);
 
 
-//  returnToRotated;
+  returnRotated;
   paint();
-
 end;
 
 procedure TRubiksCubeObject.UPrim();
 begin
-  // Implementación de la rotación inversa de la capa superior (Up)
+
 end;
 
 procedure TRubiksCubeObject.D();
@@ -296,44 +333,61 @@ begin
   // Implementación de la rotación inversa de la capa izquierda (Left)
 end;
 
-procedure TRubiksCubeObject.returnToOriginal;
+
+procedure TRubiksCubeObject.resetOriginal;
 var
-i,j,k:Integer;
+  i,j,k : integer;
 begin
   for i := 0 to 2 do
-    begin
-      for j := 0 to 2 do
+    for j := 0 to 2 do
+      for k := 0 to 2 do
         begin
-          for k:=0 to 2 do
-            begin
-              //cube[i,j,k].rotateOnX(-hasRotated.x);
-             // cube[i,j,k].rotateOnY(-hasRotated.y);
-              //cube[i,j,k].rotateOnz(-hasRotated.z);
-            end;
-
+          cube[i,j,k].resetOriginal;
         end;
-    end;
+
 end;
 
-procedure TRubiksCubeObject.returnToRotated;
+procedure TRubiksCubeObject.returnRotated();
 var
-i,j,k:Integer;
+  i, j, k: Integer;
+  m: Integer;
+  auxiliar: TRotationRegistry;
 begin
-  for i := 0 to 2 do
+  for m := 0 to rotationRegistry.Count - 1 do
+  begin
+    auxiliar := TRotationRegistry(rotationRegistry.Items[m]);
+  
+    if auxiliar.GetXRotation() <> 0 then
     begin
-      for j := 0 to 2 do
-        begin
-          for k:=0 to 2 do
-            begin
-              cube[i,j,k].rotateOnX(+hasRotated.x);
-              cube[i,j,k].rotateOnY(+hasRotated.y);
-              cube[i,j,k].rotateOnz(+hasRotated.z);
-            end;
-
-        end;
+      for i := 0 to 2 do
+        for j := 0 to 2 do
+          for k := 0 to 2 do
+          begin
+            cube[i, j, k].rotateOnX(5);
+          end;      
     end;
+    
+    if auxiliar.GetYRotation() <> 0 then
+    begin
+      for i := 0 to 2 do
+        for j := 0 to 2 do
+          for k := 0 to 2 do
+          begin
+            cube[i, j, k].rotateOnY(5);
+          end;       
+    end;
+    
+    if auxiliar.GetZRotation() <> 0 then
+    begin
+      for i := 0 to 2 do
+        for j := 0 to 2 do
+          for k := 0 to 2 do
+          begin
+            cube[i, j, k].rotateOnZ(5);
+          end;     
+    end;
+  end;
 end;
-
 
 
 end.
