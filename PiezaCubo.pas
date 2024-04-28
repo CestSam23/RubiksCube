@@ -45,7 +45,7 @@ type
       procedure paintUp();
       procedure paint(ACanvas: TCanvas);
       function getposition():TPoint3D;
-      function getDistance():Integer;
+      function getDistance():Real;
   end;
 
 implementation
@@ -300,8 +300,20 @@ begin
 end;
 
 function TPiezaCubo.getDistance;
+var
+  i,j: integer;
+  xAux,yAux,zAux, xAuxDistancia : Real;
 begin
-
+  xAux := 0; yAux := 0; zAux := 0;
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        xAux := xAux + face[i,j].x;
+        yAux := yAux + face[i,j].y;
+        zAux := zAux + face[i,j].z + OjoAObjeto;
+      end;
+        xAux := xAux/24; yAux := yAux/24; zAux := zAux/24;
+        result := sqrt((xAux*xAux)+(yAux*yAux)+(zAux*zAux));
 end;
 
 

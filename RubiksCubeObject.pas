@@ -107,7 +107,14 @@ end;
 procedure TRubiksCubeObject.paint();
 var
 i,j,k:integer;
+distance : array[0..26] of Real;
+cubesInOrder : array[0..26] of TPiezaCubo;
+auxDistance : Real;
+auxOrder : TPiezaCubo;
+n : integer;
 begin
+  n := 0;
+  //Here we decide the order to paint the cube
   canva.Rectangle(-10,-10,1000,1000);
   for i := 0 to 2 do
     begin
@@ -115,11 +122,31 @@ begin
         begin
           for k:=0 to 2 do
             begin
-              cube[i,j,k].paint(canva);
+              distance[n] := cube[i,j,k].getDistance;
+              cubesInOrder[n] := cube[i,j,k];
+              n := n+1;
             end;
-
         end;
     end;
+
+    for i := 0 to 26 do
+      for j := 0 to 25 do
+        begin
+          if(distance[j]<distance[j+1])then
+            begin
+              auxDistance := distance[j];
+              auxOrder := cubesInOrder[j];
+              distance[j] := distance[j+1];
+              cubesInOrder[j] := CubesInOrder[j+1];
+              distance[j+1] := auxDistance;
+              CubesInOrder[j+1] := auxOrder;
+            end;
+        end;
+
+    for i := 0 to 26 do CubesInOrder[i].paint(canva);
+
+
+
 end;
 
 
