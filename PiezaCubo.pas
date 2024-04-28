@@ -260,8 +260,22 @@ begin
 end;
 
 procedure TPiezaCubo.rotateLayerZ(alpha: Real);
+var
+  i,j: integer;
+  xAux,yAux: Real;
 begin
+    alpha:=(alpha*PI)/180;
 
+  for i := 0 to 5 do
+    for j := 0 to 3 do
+      begin
+        xAux:= (face[i,j].x*COS(-alpha)) + (face[i,j].y*SIN(-alpha));
+        yAux:= -(face[i,j].x*SIN(-alpha)) + (face[i,j].y*COS(-alpha));
+        face[i,j].x:=xAux;
+        face[i,j].y:=yAux;
+
+         originalPosition[i,j] := face[i,j];
+      end;
 end;
 
 procedure TPiezaCubo.paintFront;

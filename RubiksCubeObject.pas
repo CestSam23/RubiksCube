@@ -244,6 +244,7 @@ begin
 
 end;
 
+
 procedure TRubiksCubeObject.U();
 var
   temporal : TPiezaCubo;
@@ -251,27 +252,32 @@ var
 begin
 
   resetOriginal;
-  temporal := cube[0,0,1];
-  cube[0,0,1] := cube[0,1,0];
-  cube[0,1,0] := cube [0,2,1];
-  cube[0,2,1] := cube [0,1,2];
-  cube[0,1,2] := temporal;
 
-  temporal := cube[0,0,2];
-  cube[0,0,2] := cube[0,0,0];
+
+  temporal := cube[0,1,0];
+  cube[0,1,0] := cube[0,2,1];
+  cube[0,2,1] := cube[0,1,2];
+  cube[0,1,2] := cube[0,0,1];
+  cube[0,0,1] := temporal;
+
+
+  temporal := cube[0,0,0];
   cube[0,0,0] := cube[0,2,0];
   cube[0,2,0] := cube[0,2,2];
-  cube[0,2,2] := temporal;
+  cube[0,2,2] := cube[0,0,2];
+  cube[0,0,2] := temporal;
 
-  cube[0,1,0].rotateLayerY(90);
-  cube[0,2,1].rotateLayerY(90);
-  cube[0,1,2].rotateLayerY(90);
-  cube[0,0,1].rotateLayerY(90);
-  cube[0,0,0].rotateLayerY(90);
-  cube[0,2,0].rotateLayerY(90);
-  cube[0,2,2].rotateLayerY(90);
-  cube[0,0,2].rotateLayerY(90);
-  cube[0,1,1].rotateLayerY(90);
+  //SEEMS LIKE
+  //Mis movimientos respecto al eje y estan invertidos
+  cube[0,1,0].rotateLayerY(-90);
+  cube[0,2,1].rotateLayerY(-90);
+  cube[0,1,2].rotateLayerY(-90);
+  cube[0,0,1].rotateLayerY(-90);
+  cube[0,0,0].rotateLayerY(-90);
+  cube[0,2,0].rotateLayerY(-90);
+  cube[0,2,2].rotateLayerY(-90);
+  cube[0,0,2].rotateLayerY(-90);
+  cube[0,1,1].rotateLayerY(-90);
 
 
   returnRotated;
@@ -284,8 +290,36 @@ begin
 end;
 
 procedure TRubiksCubeObject.D();
+var
+  temporal : TPiezaCubo;
 begin
-  // Implementación de la rotación de la capa inferior (Down)
+  resetOriginal;
+
+   temporal := cube[2,2,0];
+  cube[2,2,0] := cube[2,0,0];
+  cube[2,0,0] := cube[2,0,2];
+  cube[2,0,2] := cube[2,2,2];
+  cube[2,2,2] := temporal;
+  
+  temporal := cube[2,1,0];
+  cube[2,1,0] := cube[2,0,1];
+  cube[2,0,1] := cube[2,1,2];
+  cube[2,1,2] := cube[2,2,1];
+  cube[2,2,1] := temporal;
+
+  cube[2,0,0].rotateLayerY(90);
+  cube[2,1,0].rotateLayerY(90);
+  cube[2,2,0].rotateLayerY(90);
+  cube[2,0,1].rotateLayerY(90);
+  cube[2,1,1].rotateLayerY(90);
+  cube[2,2,1].rotateLayerY(90);
+  cube[2,0,2].rotateLayerY(90);
+  cube[2,1,2].rotateLayerY(90);
+  cube[2,2,2].rotateLayerY(90);
+
+  returnRotated;
+  paint;
+
 end;
 
 procedure TRubiksCubeObject.DPrim();
@@ -294,9 +328,40 @@ begin
 end;
 
 procedure TRubiksCubeObject.F();
+var
+  temporal : TPiezaCubo;
 begin
-  // Implementación de la rotación de la capa frontal (Front)
+  // Guardar el estado original del cubo
+  resetOriginal;
+
+  temporal := cube[0,0,0];
+  cube[0,0,0] := cube[2,0,0];
+  cube[2,0,0] := cube[2,2,0];
+  cube[2,2,0] := cube[0,2,0];
+  cube[0,2,0] := temporal;
+  
+  temporal := cube[0,1,0];
+  cube[0,1,0] := cube[1,0,0];
+  cube[1,0,0] := cube[2,1,0];
+  cube[2,1,0] := cube[1,2,0];
+  cube[1,2,0] := temporal;
+
+  // Rotar las capas correspondientes en sentido antihorario alrededor del eje z
+  cube[0,0,0].rotateLayerZ(90);
+  cube[0,2,0].rotateLayerZ(90);
+  cube[2,2,0].rotateLayerZ(90);
+  cube[2,0,0].rotateLayerZ(90);
+  cube[0,1,0].rotateLayerZ(90);
+  cube[1,2,0].rotateLayerZ(90);
+  cube[2,1,0].rotateLayerZ(90);
+  cube[1,0,0].rotateLayerZ(90);
+
+  // Actualizar la visualización del cubo
+  returnRotated;
+  paint();
 end;
+
+
 
 procedure TRubiksCubeObject.FPrim();
 begin
@@ -304,9 +369,41 @@ begin
 end;
 
 procedure TRubiksCubeObject.B();
+var
+  temporal: TPiezaCubo;
 begin
-  // Implementación de la rotación de la capa posterior (Back)
+  // Guardar el estado original del cubo
+  resetOriginal;
+
+  // Intercambio de aristas
+  temporal := cube[0,1,2];
+  cube[0,1,2] := cube[1,0,2];
+  cube[1,0,2] := cube[2,1,2];
+  cube[2,1,2] := cube[1,2,2];
+  cube[1,2,2] := temporal;
+
+  temporal := cube[0,0,2];
+  cube[0,0,2] := cube[2,0,2];
+  cube[2,0,2] := cube[2,2,2];
+  cube[2,2,2] := cube[0,2,2];
+  cube[0,2,2] := temporal;
+
+  // Rotar las capas correspondientes
+  cube[0,0,2].rotateLayerZ(90);
+  cube[0,2,2].rotateLayerZ(90);
+  cube[2,2,2].rotateLayerZ(90);
+  cube[2,0,2].rotateLayerZ(90);
+  cube[1,0,2].rotateLayerZ(90);
+  cube[2,1,2].rotateLayerZ(90);
+  cube[1,2,2].rotateLayerZ(90);
+  cube[0,1,2].rotateLayerZ(90);
+
+  // Actualizar la visualización del cubo
+  returnRotated;
+  paint();
 end;
+
+
 
 procedure TRubiksCubeObject.BPrim();
 begin
@@ -314,9 +411,42 @@ begin
 end;
 
 procedure TRubiksCubeObject.R();
+var
+  temporal : TPiezaCubo;
+  i,j,k: integer;
 begin
-  // Implementación de la rotación de la capa derecha (Right)
+  // Guardar el estado original del cubo
+  resetOriginal;
+
+  temporal := cube[0,2,0];
+  cube[0,2,0] := cube[2,2,0];
+  cube[2,2,0] := cube[2,2,2];
+  cube[2,2,2] := cube[0,2,2];
+  cube[0,2,2] := temporal;
+
+
+  temporal := cube[1,2,0];
+  cube[1,2,0] := cube[2,2,1];
+  cube[2,2,1] := cube[1,2,2];
+  cube[1,2,2] := cube[0,2,1];
+  cube[0,2,1] := temporal;
+
+  // Rotar las capas correspondientes
+  cube[0,2,0].rotateLayerX(90);
+  cube[0,2,2].rotateLayerX(90);
+  cube[2,2,2].rotateLayerX(90);
+  cube[2,2,0].rotateLayerX(90);
+  cube[0,2,1].rotateLayerX(90);
+  cube[1,2,0].rotateLayerX(90);
+  cube[1,2,2].rotateLayerX(90);
+  cube[2,2,1].rotateLayerX(90);
+
+  // Actualizar la visualización del cubo
+  returnRotated;
+  paint();
 end;
+
+
 
 procedure TRubiksCubeObject.RPrim();
 begin
@@ -324,13 +454,75 @@ begin
 end;
 
 procedure TRubiksCubeObject.L();
+var
+  temporal : TPiezaCubo;
 begin
-  // Implementación de la rotación de la capa izquierda (Left)
+  // Guardar el estado original del cubo
+  resetOriginal;
+
+  temporal := cube[0,0,0];
+  cube[0,0,0] := cube[0,0,2];
+  cube[0,0,2] := cube[2,0,2];
+  cube[2,0,2] := cube[2,0,0];
+  cube[2,0,0] := temporal;
+
+  temporal := cube[1,0,0];
+  cube[1,0,0] := cube[0,0,1];
+  cube[0,0,1] := cube[1,0,2];
+  cube[1,0,2] := cube[2,0,1];
+  cube[2,0,1] := temporal;
+
+  // Rotar las capas correspondientes
+  cube[0,0,0].rotateLayerX(-90);
+  cube[0,0,2].rotateLayerX(-90);
+  cube[2,0,2].rotateLayerX(-90);
+  cube[2,0,0].rotateLayerX(-90);
+  cube[0,0,1].rotateLayerX(-90);
+  cube[1,0,0].rotateLayerX(-90);
+  cube[1,0,2].rotateLayerX(-90);
+  cube[2,0,1].rotateLayerX(-90);
+
+  // Actualizar la visualización del cubo
+  returnRotated;
+  paint();
 end;
 
+
+
 procedure TRubiksCubeObject.LPrim();
+var
+  temporal : TPiezaCubo;
 begin
-  // Implementación de la rotación inversa de la capa izquierda (Left)
+  // Guardar el estado original del cubo
+  resetOriginal;
+
+  // Intercambios de aristas
+  temporal := cube[1,0,0];
+  cube[1,0,0] := cube[0,0,1];
+  cube[0,0,1] := cube[1,0,2];
+  cube[1,0,2] := cube[2,0,1];
+  cube[2,0,1] := temporal;
+
+  // Intercambios de esquinas
+  temporal := cube[0,0,0];
+  cube[0,0,0] := cube[0,0,2];
+  cube[0,0,2] := cube[2,0,2];
+  cube[2,0,2] := cube[2,0,0];
+  cube[2,0,0] := temporal;
+
+  // Rotar las capas correspondientes
+  cube[0,0,0].rotateLayerX(-90);
+  cube[0,0,2].rotateLayerX(-90);
+  cube[2,0,2].rotateLayerX(-90);
+  cube[2,0,0].rotateLayerX(-90);
+  cube[0,0,1].rotateLayerX(-90);
+  cube[1,0,0].rotateLayerX(-90);
+  cube[1,0,2].rotateLayerX(-90);
+  cube[2,0,1].rotateLayerX(-90);
+
+  // Actualizar la visualización del cubo
+  returnRotated;
+  paint();
 end;
 
 

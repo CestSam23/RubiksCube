@@ -26,6 +26,11 @@ type
     Button13: TButton;
     Button14: TButton;
     Button15: TButton;
+    procedure Button3Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button15Click(Sender: TObject);
     procedure Button14Click(Sender: TObject);
@@ -45,6 +50,11 @@ implementation
 
 {$R *.dfm}
 
+procedure TForm1.Button11Click(Sender: TObject);
+begin
+  cube.B;
+end;
+
 procedure TForm1.Button13Click(Sender: TObject);
 begin
   cube.XAxisRotate; 
@@ -63,6 +73,26 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   cube.U;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  cube.D;
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  cube.R;
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+  Cube.L;
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+begin
+  Cube.F;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
