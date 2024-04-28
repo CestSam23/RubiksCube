@@ -119,8 +119,8 @@ begin
         Face[i,j].y := (Face[i,j].y*factor) + (y*factor);
         Face[i,j].z := (Face[i,j].z*factor) + (z*factor);
       end;
-      ojoAObjeto := 20*4;
-      ojoAPantalla := 20*3;
+      ojoAObjeto := 50*4;
+      ojoAPantalla := 50*3;
       OriginPosition.x := x*factor; OriginPosition.y := y*factor; OriginPosition.z := z*factor;
 
 end;
@@ -156,7 +156,7 @@ begin
     for j := 0 to 3 do
       begin
         yAux := (face[i,j].y * COS(-alpha) + face[i,j].z*SIN(-alpha));
-        zAux:= (face[i,j].y*sin(-alpha) + face[i,j].z*COS(-alpha));
+        zAux:= (-face[i,j].y*sin(-alpha) + face[i,j].z*COS(-alpha));
         face[i,j].y := yAux;
         face[i,j].z := zAux;
       end;
@@ -234,7 +234,7 @@ procedure TPiezaCubo.paint(ACanvas: TCanvas);
   begin
     zAux := ojoAObjeto + z;
     xAux := (OjoAPantalla*x)/zAux;
-    xP := Round(xAux+position.x);    //Pendiente xPantalla, yPantalla
+    xP := Round(xAux+position.x);    //Traslate to the wished position
     yAux := (OjoAPAntalla*y) / zAux;
     yP := round(yAUx+position.y);
   end;
@@ -243,7 +243,6 @@ var
 i,j,k : integer;
 begin
   ACanvas.Pen.Color:=cLBlack;
-  ACanvas.Rectangle(-100,-100,1000,1000);
   acanvas.Pen.Width := 2;
   self.orderPlanes;
 
