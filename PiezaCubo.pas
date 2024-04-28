@@ -45,6 +45,7 @@ type
       procedure paintUp();
       procedure paint(ACanvas: TCanvas);
       function getposition():TPoint3D;
+      function getDistance():Integer;
   end;
 
 implementation
@@ -296,7 +297,10 @@ begin
             order[j+1] := auxOrder;
           end;
         end;
+end;
 
+function TPiezaCubo.getDistance;
+begin
 
 end;
 
