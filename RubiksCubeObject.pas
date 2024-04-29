@@ -145,6 +145,7 @@ n : integer;
 begin
   n := 0;
   //Here we decide the order to paint the cube
+  canva.Brush.Color := clWebOldLace;
   canva.Rectangle(-10,-10,1000,1000);
   for i := 0 to 2 do
     begin

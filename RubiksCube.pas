@@ -10,31 +10,31 @@ type
   TForm1 = class(TForm)
     Image1: TImage;
     Panel1: TPanel;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    Button6: TButton;
-    Button7: TButton;
-    Button8: TButton;
-    Button9: TButton;
-    Button10: TButton;
-    Button11: TButton;
-    Button12: TButton;
+    ButtonU: TButton;
+    ButtonUPrim: TButton;
+    ButtonD: TButton;
+    ButtonDPrim: TButton;
+    ButtonR: TButton;
+    ButtonRPrim: TButton;
+    ButtonL: TButton;
+    ButtonLPrim: TButton;
+    ButtonF: TButton;
+    ButtonFPrim: TButton;
+    ButtonB: TButton;
+    ButtonBPrim: TButton;
     Panel2: TPanel;
-    Button13: TButton;
-    Button14: TButton;
-    Button15: TButton;
-    procedure Button3Click(Sender: TObject);
-    procedure Button11Click(Sender: TObject);
-    procedure Button9Click(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button15Click(Sender: TObject);
-    procedure Button14Click(Sender: TObject);
-    procedure Button13Click(Sender: TObject);
+    ButtonXPos: TButton;
+    ButtonYPos: TButton;
+    ButtonZPos: TButton;
+    procedure ButtonDClick(Sender: TObject);
+    procedure ButtonBClick(Sender: TObject);
+    procedure ButtonFClick(Sender: TObject);
+    procedure ButtonLClick(Sender: TObject);
+    procedure ButtonRClick(Sender: TObject);
+    procedure ButtonUClick(Sender: TObject);
+    procedure ButtonZPosClick(Sender: TObject);
+    procedure ButtonYPosClick(Sender: TObject);
+    procedure ButtonXPosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -50,47 +50,47 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button11Click(Sender: TObject);
+procedure TForm1.ButtonBClick(Sender: TObject);
 begin
   cube.B;
 end;
 
-procedure TForm1.Button13Click(Sender: TObject);
+procedure TForm1.ButtonXPosClick(Sender: TObject);
 begin
   cube.XAxisRotate; 
 end;
 
-procedure TForm1.Button14Click(Sender: TObject);
+procedure TForm1.ButtonYPosClick(Sender: TObject);
 begin
 cube.YAxisRotate;
 end;
 
-procedure TForm1.Button15Click(Sender: TObject);
+procedure TForm1.ButtonZPosClick(Sender: TObject);
 begin
   cube.zAxisRotate;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.ButtonUClick(Sender: TObject);
 begin
   cube.U;
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TForm1.ButtonDClick(Sender: TObject);
 begin
   cube.D;
 end;
 
-procedure TForm1.Button5Click(Sender: TObject);
+procedure TForm1.ButtonRClick(Sender: TObject);
 begin
   cube.R;
 end;
 
-procedure TForm1.Button7Click(Sender: TObject);
+procedure TForm1.ButtonLClick(Sender: TObject);
 begin
   Cube.L;
 end;
 
-procedure TForm1.Button9Click(Sender: TObject);
+procedure TForm1.ButtonFClick(Sender: TObject);
 begin
   Cube.F;
 end;
@@ -98,7 +98,13 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   cube := TRubiksCubeObject.Create(200,150,image1.Canvas);
+  //image1.Picture.LoadFromFile('Fondo.bmp');
   Cube.paint();
+  form1.Color :=clWebWheat;
+  panel1.Color := clWebPapayaWhip;
+  panel2.Color := clWebPapayaWhip;
+
+  
 end;
 
 end.

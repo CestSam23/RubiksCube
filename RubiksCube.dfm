@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 600
-  ClientWidth = 700
-  Color = clBtnFace
+  Caption = 'Cubo Rubik'
+  ClientHeight = 433
+  ClientWidth = 686
+  Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -25,144 +25,142 @@ object Form1: TForm1
     Top = 40
     Width = 185
     Height = 313
-    Caption = 'Panel1'
     TabOrder = 0
-    object Button1: TButton
+    object ButtonU: TButton
       Left = 24
       Top = 24
       Width = 41
       Height = 25
-      Caption = 'ButtonU'
+      Caption = 'U'
       TabOrder = 0
-      OnClick = Button1Click
+      OnClick = ButtonUClick
     end
-    object Button2: TButton
+    object ButtonUPrim: TButton
       Left = 104
       Top = 24
       Width = 41
       Height = 25
-      Caption = 'ButtonUPrim'
+      Caption = 'U'#39
       TabOrder = 1
     end
-    object Button3: TButton
+    object ButtonD: TButton
       Left = 24
       Top = 64
       Width = 41
       Height = 25
-      Caption = 'ButtonD'
+      Caption = 'D'
       TabOrder = 2
-      OnClick = Button3Click
+      OnClick = ButtonDClick
     end
-    object Button4: TButton
+    object ButtonDPrim: TButton
       Left = 104
       Top = 64
       Width = 41
       Height = 25
-      Caption = 'BUttonDPrim'
+      Caption = 'D'#39
       TabOrder = 3
     end
-    object Button5: TButton
+    object ButtonR: TButton
       Left = 24
       Top = 104
       Width = 41
       Height = 25
-      Caption = 'ButtonR'
+      Caption = 'R'
       TabOrder = 4
-      OnClick = Button5Click
+      OnClick = ButtonRClick
     end
-    object Button6: TButton
+    object ButtonRPrim: TButton
       Left = 104
       Top = 104
       Width = 41
       Height = 25
-      Caption = 'ButtonRPrim'
+      Caption = 'R'#39
       TabOrder = 5
     end
-    object Button7: TButton
+    object ButtonL: TButton
       Left = 24
       Top = 152
       Width = 41
       Height = 25
-      Caption = 'ButtonL'
+      Caption = 'L'
       TabOrder = 6
-      OnClick = Button7Click
+      OnClick = ButtonLClick
     end
-    object Button8: TButton
+    object ButtonLPrim: TButton
       Left = 104
       Top = 152
       Width = 41
       Height = 25
-      Caption = 'ButtonLPrim'
+      Caption = 'L'#39
       TabOrder = 7
     end
-    object Button9: TButton
+    object ButtonF: TButton
       Left = 24
       Top = 200
       Width = 41
       Height = 25
-      Caption = 'ButtonF'
+      Caption = 'F'
       TabOrder = 8
-      OnClick = Button9Click
+      OnClick = ButtonFClick
     end
-    object Button10: TButton
+    object ButtonFPrim: TButton
       Left = 104
       Top = 200
       Width = 41
       Height = 25
-      Caption = 'ButtonFPrim'
+      Caption = 'F'#39
       TabOrder = 9
     end
-    object Button11: TButton
+    object ButtonB: TButton
       Left = 24
       Top = 248
       Width = 41
       Height = 25
-      Caption = 'ButtonB'
+      Caption = 'B'
       TabOrder = 10
-      OnClick = Button11Click
+      OnClick = ButtonBClick
     end
-    object Button12: TButton
+    object ButtonBPrim: TButton
       Left = 104
       Top = 248
       Width = 41
       Height = 25
-      Caption = 'ButtonBPrim'
+      Caption = 'B'#39
       TabOrder = 11
     end
   end
   object Panel2: TPanel
-    Left = 472
-    Top = 432
+    Left = 480
+    Top = 376
     Width = 185
     Height = 41
-    Caption = 'Panel2'
     TabOrder = 1
-    object Button13: TButton
+    object ButtonXPos: TButton
       Left = 8
       Top = 8
       Width = 33
       Height = 25
-      Caption = 'Button13'
+      Caption = 'X+'
       TabOrder = 0
-      OnClick = Button13Click
+      OnClick = ButtonXPosClick
     end
-    object Button14: TButton
+    object ButtonYPos: TButton
       Left = 64
       Top = 8
       Width = 33
       Height = 25
-      Caption = 'Button13'
+      Caption = 'Y+'
       TabOrder = 1
-      OnClick = Button14Click
+      OnClick = ButtonYPosClick
     end
-    object Button15: TButton
+    object ButtonZPos: TButton
       Left = 120
       Top = 8
       Width = 33
       Height = 25
-      Caption = 'Button13'
+      Caption = 'Z+'
       TabOrder = 2
-      OnClick = Button15Click
+      OnClick = ButtonZPosClick
     end
   end
 end

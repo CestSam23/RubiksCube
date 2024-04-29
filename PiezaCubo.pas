@@ -77,12 +77,12 @@ begin
 
   rotated.x := 0; rotated.z := 0; rotated.y := 0;
 
-  colorOfFace[0] := clWhite;
-  colorOfFace[1] := clYellow;
-  colorOfFace[2] := clBlue;
-  colorOfFace[3] := clRed;
-  colorOfFace[4] := clGreen;
-  colorOfFace[5] := clWebDarkOrange;
+  colorOfFace[0] := clWebCornSilk;
+  colorOfFace[1] := clWebGold;
+  colorOfFace[2] := clWebSteelBlue;
+  colorOfFace[3] := clWebIndianRed;
+  colorOfFace[4] := clWebMediumAquamarine;
+  colorOfFace[5] := clWebChocolate;
 
   //0-Down; 1-Up; 2-Left; 3-Front; 4-Right; 5-Back;
 
