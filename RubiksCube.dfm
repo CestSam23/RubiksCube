@@ -42,6 +42,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'U'#39
       TabOrder = 1
+      OnClick = ButtonUPrimClick
     end
     object ButtonD: TButton
       Left = 24
@@ -59,6 +60,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'D'#39
       TabOrder = 3
+      OnClick = ButtonDPrimClick
     end
     object ButtonR: TButton
       Left = 24
@@ -76,6 +78,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'R'#39
       TabOrder = 5
+      OnClick = ButtonRPrimClick
     end
     object ButtonL: TButton
       Left = 24
@@ -93,6 +96,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'L'#39
       TabOrder = 7
+      OnClick = ButtonLPrimClick
     end
     object ButtonF: TButton
       Left = 24
@@ -110,6 +114,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'F'#39
       TabOrder = 9
+      OnClick = ButtonFPrimClick
     end
     object ButtonB: TButton
       Left = 24
@@ -127,6 +132,7 @@ object Form1: TForm1
       Height = 25
       Caption = 'B'#39
       TabOrder = 11
+      OnClick = ButtonBPrimClick
     end
   end
   object Panel2: TPanel

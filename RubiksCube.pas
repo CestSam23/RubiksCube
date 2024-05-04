@@ -26,6 +26,12 @@ type
     ButtonXPos: TButton;
     ButtonYPos: TButton;
     ButtonZPos: TButton;
+    procedure ButtonLPrimClick(Sender: TObject);
+    procedure ButtonRPrimClick(Sender: TObject);
+    procedure ButtonBPrimClick(Sender: TObject);
+    procedure ButtonFPrimClick(Sender: TObject);
+    procedure ButtonDPrimClick(Sender: TObject);
+    procedure ButtonUPrimClick(Sender: TObject);
     procedure ButtonDClick(Sender: TObject);
     procedure ButtonBClick(Sender: TObject);
     procedure ButtonFClick(Sender: TObject);
@@ -52,12 +58,15 @@ implementation
 
 procedure TForm1.ButtonBClick(Sender: TObject);
 begin
-  cube.B;
+  cube.F;
+  cube.F;
+  cube.F;
+
 end;
 
 procedure TForm1.ButtonXPosClick(Sender: TObject);
 begin
-  cube.XAxisRotate; 
+  cube.XAxisRotate;
 end;
 
 procedure TForm1.ButtonYPosClick(Sender: TObject);
@@ -73,9 +82,28 @@ end;
 procedure TForm1.ButtonUClick(Sender: TObject);
 begin
   cube.U;
+  cube.U;
+  cube.U;
+end;
+
+procedure TForm1.ButtonUPrimClick(Sender: TObject);
+begin
+  cube.U;
+end;
+
+procedure TForm1.ButtonBPrimClick(Sender: TObject);
+begin
+  cube.F;
 end;
 
 procedure TForm1.ButtonDClick(Sender: TObject);
+begin
+  cube.D;
+  cube.D;
+  cube.D;
+end;
+
+procedure TForm1.ButtonDPrimClick(Sender: TObject);
 begin
   cube.D;
 end;
@@ -83,16 +111,37 @@ end;
 procedure TForm1.ButtonRClick(Sender: TObject);
 begin
   cube.R;
+  cube.R;
+  cube.R;
+end;
+
+procedure TForm1.ButtonRPrimClick(Sender: TObject);
+begin
+  cube.R;
 end;
 
 procedure TForm1.ButtonLClick(Sender: TObject);
 begin
   Cube.L;
+  Cube.L;
+  Cube.L;
+end;
+
+procedure TForm1.ButtonLPrimClick(Sender: TObject);
+begin
+  cube.L;
 end;
 
 procedure TForm1.ButtonFClick(Sender: TObject);
 begin
-  Cube.F;
+  Cube.B;
+end;
+
+procedure TForm1.ButtonFPrimClick(Sender: TObject);
+begin
+  cube.B;
+  cube.B;
+  cube.B;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -104,7 +153,7 @@ begin
   panel1.Color := clWebPapayaWhip;
   panel2.Color := clWebPapayaWhip;
 
-  
+
 end;
 
 end.
