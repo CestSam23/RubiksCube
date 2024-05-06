@@ -43,9 +43,9 @@ type
       procedure rotateOnZ(alpha: Real);
       procedure paint(ACanvas: TCanvas);
       procedure resetOriginal();
-      procedure resetRotated(x,y,z:Real);
       function getposition():TPoint3D;
       function getDistance():Real;
+      function getCenter():TPoint3D;
   end;
 
 implementation
@@ -153,13 +153,46 @@ begin
 end;
 
 procedure TPiezaCubo.rotateOnCenter(alphaX: Real; alphaY: Real; Alphaz: Real);
+
+  procedure toCenter(center : TPoint3d);
+    var
+    i,j:integer;
+    begin
+      for i := 0 to 5 do
+        for j := 0 to 3 do
+          begin
+            face[i,j].x := face[i,j].x - center.x;
+            face[i,j].y := face[i,j].y - center.y;
+            face[i,j].z := face[i,j].z - center.z;
+          end;
+    end;
+
+  procedure toNormal(center : TPoint3d);
+    var
+    i,j:integer;
+    begin
+      for i := 0 to 5 do
+        for j := 0 to 3 do
+          begin
+            face[i,j].x := face[i,j].x + center.x;
+            face[i,j].y := face[i,j].y + center.y;
+            face[i,j].z := face[i,j].z + center.z;
+          end;
+    end;
+
+
 var
   i,j : integer;
   xAux,yAux,zAux : Real;
+  center : TPoint3d;
 begin
   alphaX:=alphaX*Pi/180;
   alphaY:=alphaY*Pi/180;
   alphaZ:=alphaz*Pi/180;
+
+  center := getCenter;
+
+  toCenter(center);
 
   if(alphaX<>0)then
     begin
@@ -175,16 +208,28 @@ begin
 
   if(alphaY<>0) then
     begin
-
+      for i := 0 to 5 do
+        for j := 0 to 3 do
+          begin
+            xAux:= -(face[i,j].z*SIN(-alphay)) + (face[i,j].x*COS(-alphay));
+            zAux:= (face[i,j].z*COS(-alphay)) + (face[i,j].x*SIN(-alphay));
+            face[i,j].x:=xAux;
+            face[i,j].z:=zAux;
+          end;
     end;
 
   if(alphaZ<>0) then
     begin
-
+      for i := 0 to 5 do
+        for j := 0 to 3 do
+          begin
+            xAux:= (face[i,j].x*COS(-alphaz)) + (face[i,j].y*SIN(-alphaz));
+            yAux:= -(face[i,j].x*SIN(-alphaz)) + (face[i,j].y*COS(-alphaz));
+            face[i,j].x:=xAux;
+            face[i,j].y:=yAux;
+          end;
     end;
-
-
-
+  toNormal(center);
 
 end;
 
@@ -392,6 +437,22 @@ begin
         result := sqrt((xAux*xAux)+(yAux*yAux)+(zAux*zAux));
 end;
 
+function TPiezaCubo.getCenter : TPoint3d;
+var
+  i,j: integer;
+begin
+  for i := 0 to 5 do
+    for j := 0 to 3  do
+      begin
+        result.x := result.x + face[i,j].x;
+        result.y := result.y + face[i,j].y;
+        result.z := result.z + face[i,j].z;
+      end;
+      result.x := result.x /24;
+      result.y := result.y /24;
+      result.z := result.z /24;
+
+end;
 
 procedure TPiezaCubo.resetOriginal;
 var
@@ -412,14 +473,6 @@ begin
 
 end;
 
-
-procedure TPIezaCubo.resetRotated(x:Real;y:Real;z:Real);
-var
-  i,j : Integer;
-  tempRotated : TPoint3d;
-begin
-  
-end;
 
 
 

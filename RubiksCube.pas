@@ -27,13 +27,22 @@ type
     ButtonYPos: TButton;
     ButtonZPos: TButton;
     Panel3: TPanel;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
+    ButtonXPosI: TButton;
+    ButtonYPosI: TButton;
+    BUttonZPosI: TButton;
     ComboBox: TComboBox;
-    procedure Button3Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    ButtonYNEgI: TButton;
+    ButtonXNegI: TButton;
+    ButtonZNegI: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    procedure ButtonXNegIClick(Sender: TObject);
+    procedure ButtonYNEgIClick(Sender: TObject);
+    procedure ButtonZNegIClick(Sender: TObject);
+    procedure BUttonZPosIClick(Sender: TObject);
+    procedure ButtonYPosIClick(Sender: TObject);
+    procedure ButtonXPosIClick(Sender: TObject);
     procedure ComboBoxChange(Sender: TObject);
     procedure ButtonLPrimClick(Sender: TObject);
     procedure ButtonRPrimClick(Sender: TObject);
@@ -66,19 +75,19 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.ButtonXPosIClick(Sender: TObject);
 begin
   cube.getCube(posA,posB,posC).rotateOnCenter(5,0,0);
   cube.paint;
 end;
 
-procedure TForm1.Button2Click(Sender: TObject);
+procedure TForm1.ButtonYPosIClick(Sender: TObject);
 begin
   cube.getCube(posA,posB,posC).rotateOnCenter(0,5,0);
   cube.paint;
 end;
 
-procedure TForm1.Button3Click(Sender: TObject);
+procedure TForm1.BUttonZPosIClick(Sender: TObject);
 begin
   cube.getCube(posA,posB,posC).rotateOnCenter(0,0,5);
   cube.paint;
@@ -92,14 +101,32 @@ begin
 
 end;
 
+procedure TForm1.ButtonXNegIClick(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(-5,0,0);
+  cube.paint;
+end;
+
 procedure TForm1.ButtonXPosClick(Sender: TObject);
 begin
   cube.XAxisRotate;
 end;
 
+procedure TForm1.ButtonYNEgIClick(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(0,-5,0);
+  cube.paint;
+end;
+
 procedure TForm1.ButtonYPosClick(Sender: TObject);
 begin
 cube.YAxisRotate;
+end;
+
+procedure TForm1.ButtonZNegIClick(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(0,0,-5);
+  cube.paint;
 end;
 
 procedure TForm1.ButtonZPosClick(Sender: TObject);
@@ -194,11 +221,12 @@ begin
   form1.Color :=clWebWheat;
   panel1.Color := clWebPapayaWhip;
   panel2.Color := clWebPapayaWhip;
+  panel3.Color := clWebPapayaWhip;
 
   for i := 0 to 2 do
     for j := 0 to 2 do
       for k := 0 to 2 do
-        combobox.AddItem((intToStr(i) + ' ' + intToStr(j) + ' ' + intToStr(k)),sender);
+        combobox.AddItem((intToStr(k) + ' ' + intToStr(j) + ' ' + intToStr(i)),sender);
 
        
 
