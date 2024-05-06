@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Cubo Rubik'
-  ClientHeight = 433
-  ClientWidth = 686
+  ClientHeight = 746
+  ClientWidth = 697
   Color = clInfoBk
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -167,6 +167,49 @@ object Form1: TForm1
       Caption = 'Z+'
       TabOrder = 2
       OnClick = ButtonZPosClick
+    end
+  end
+  object Panel3: TPanel
+    Left = 32
+    Top = 400
+    Width = 400
+    Height = 321
+    TabOrder = 2
+    object Button1: TButton
+      Left = 304
+      Top = 56
+      Width = 75
+      Height = 25
+      Caption = 'Button1'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 312
+      Top = 112
+      Width = 75
+      Height = 25
+      Caption = 'Button2'
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+    object Button3: TButton
+      Left = 304
+      Top = 176
+      Width = 75
+      Height = 25
+      Caption = 'Button3'
+      TabOrder = 2
+      OnClick = Button3Click
+    end
+    object ComboBox: TComboBox
+      Left = 24
+      Top = 80
+      Width = 145
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 3
+      OnChange = ComboBoxChange
     end
   end
 end

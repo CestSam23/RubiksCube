@@ -26,6 +26,15 @@ type
     ButtonXPos: TButton;
     ButtonYPos: TButton;
     ButtonZPos: TButton;
+    Panel3: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    ComboBox: TComboBox;
+    procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure ComboBoxChange(Sender: TObject);
     procedure ButtonLPrimClick(Sender: TObject);
     procedure ButtonRPrimClick(Sender: TObject);
     procedure ButtonBPrimClick(Sender: TObject);
@@ -51,10 +60,29 @@ type
 var
   Form1: TForm1;
   Cube : TRubiksCubeObject;
+  posA,posB,posC : integer;
 
 implementation
 
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(5,0,0);
+  cube.paint;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(0,5,0);
+  cube.paint;
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  cube.getCube(posA,posB,posC).rotateOnCenter(0,0,5);
+  cube.paint;
+end;
 
 procedure TForm1.ButtonBClick(Sender: TObject);
 begin
@@ -77,6 +105,18 @@ end;
 procedure TForm1.ButtonZPosClick(Sender: TObject);
 begin
   cube.zAxisRotate;
+end;
+
+procedure TForm1.ComboBoxChange(Sender: TObject);
+var
+  inputStr : string;
+begin
+  inputStr := combobox.Text;
+  posA := StrToInt(Copy(inputStr, 1, Pos(' ', inputStr) - 1));
+  Delete(inputStr, 1, Pos(' ', inputStr));
+  posB := StrToInt(Copy(inputStr, 1, Pos(' ', inputStr) - 1));
+  Delete(inputStr, 1, Pos(' ', inputStr));
+  posC := StrToInt(inputStr);
 end;
 
 procedure TForm1.ButtonUClick(Sender: TObject);
@@ -145,6 +185,8 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+  i,j,k : Integer;
 begin
   cube := TRubiksCubeObject.Create(200,150,image1.Canvas);
   //image1.Picture.LoadFromFile('Fondo.bmp');
@@ -153,6 +195,12 @@ begin
   panel1.Color := clWebPapayaWhip;
   panel2.Color := clWebPapayaWhip;
 
+  for i := 0 to 2 do
+    for j := 0 to 2 do
+      for k := 0 to 2 do
+        combobox.AddItem((intToStr(i) + ' ' + intToStr(j) + ' ' + intToStr(k)),sender);
+
+       
 
 end;
 

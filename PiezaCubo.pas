@@ -41,14 +41,7 @@ type
       procedure rotateOnX(alpha: Real);
       procedure rotateOnY(alpha: Real);
       procedure rotateOnZ(alpha: Real);
-      procedure paintFront();
-      procedure paintBack();
-      procedure paintLeft();
-      procedure paintRight();
-      procedure paintDown();
-      procedure paintUp();
       procedure paint(ACanvas: TCanvas);
-      procedure rotateOnCustomAxis(alpha, axisX, AxisY, AxisZ : Real);
       procedure resetOriginal();
       procedure resetRotated(x,y,z:Real);
       function getposition():TPoint3D;
@@ -160,7 +153,38 @@ begin
 end;
 
 procedure TPiezaCubo.rotateOnCenter(alphaX: Real; alphaY: Real; Alphaz: Real);
+var
+  i,j : integer;
+  xAux,yAux,zAux : Real;
 begin
+  alphaX:=alphaX*Pi/180;
+  alphaY:=alphaY*Pi/180;
+  alphaZ:=alphaz*Pi/180;
+
+  if(alphaX<>0)then
+    begin
+      for i := 0 to 5 do
+        for j := 0 to 3 do
+          begin
+            yAux := ((face[i,j].y)* COS(-alphaX) + (face[i,j].z)*SIN(-alphaX));
+            zAux:= ((-face[i,j].y)*sin(-alphaX) + (face[i,j].z)*COS(-alphaX));
+            face[i,j].y := yAux;
+            face[i,j].z := zAux;
+          end;
+    end;
+
+  if(alphaY<>0) then
+    begin
+
+    end;
+
+  if(alphaZ<>0) then
+    begin
+
+    end;
+
+
+
 
 end;
 
@@ -278,35 +302,6 @@ begin
       end;
 end;
 
-procedure TPiezaCubo.paintFront;
-begin
-
-end;
-
-procedure TPiezaCubo.paintBack;
-begin
-
-end;
-
-procedure TPiezaCubo.paintLeft;
-begin
-
-end;
-
-procedure TPiezaCubo.paintRight;
-begin
-
-end;
-
-procedure TPiezaCubo.paintDown;
-begin
-
-end;
-
-procedure TPiezaCubo.paintUp;
-begin
-
-end;
 
 procedure TPiezaCubo.paint(ACanvas: TCanvas);
 
@@ -424,12 +419,6 @@ var
   tempRotated : TPoint3d;
 begin
   
-end;
-
-procedure TPiezaCubo.rotateOnCustomAxis(alpha: Real; axisX, axisY, axisZ: Real);
-
-begin
-
 end;
 
 

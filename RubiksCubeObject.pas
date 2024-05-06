@@ -49,6 +49,8 @@ type
       procedure L();
       procedure LPrim();
 
+      function getCube(i,j,k : Integer) : TPiezaCubo;
+
 
   end;
 implementation
@@ -249,7 +251,6 @@ end;
 procedure TRubiksCubeObject.U();
 var
   temporal : TPiezaCubo;
-  i,j,k: integer;
 begin
 
   resetOriginal;
@@ -524,7 +525,6 @@ end;
 procedure TRubiksCubeObject.R();
 var
   temporal : TPiezaCubo;
-  i,j,k: integer;
 begin
   // Guardar el estado original del cubo
   resetOriginal;
@@ -713,6 +713,11 @@ begin
           end;     
     end;
   end;
+end;
+
+function TRubiksCubeObject.getCube(i: Integer; j: Integer; k: Integer) : TPiezaCubo;
+begin
+  result := cube[i,j,k];
 end;
 
 
